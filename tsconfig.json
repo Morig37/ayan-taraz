@@ -1,4 +1,3 @@
-// tsconfig.json
 {
   "compilerOptions": {
     "target": "es5",
@@ -19,7 +18,9 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["bcryptjs", "jsonwebtoken"]
   },
   "include": ["src"]
 }

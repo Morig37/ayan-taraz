@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import {
@@ -13,11 +14,8 @@ import {
   ConsultationRequest,
 } from './pages';
 import { TaxCalendarPage } from './pages/TaxCalendar';
+import PaymentVerification from './pages/PaymentVerification';
 
-{
-  path: '/payment/verify',
-  element: <PaymentVerification />
-}
 export default function AppRoutes() {
   return (
     <Routes>
@@ -33,6 +31,7 @@ export default function AppRoutes() {
         <Route path="survey" element={<Survey />} />
         <Route path="consultation" element={<ConsultationRequest />} />
         <Route path="/tax-calendar" element={<TaxCalendarPage />} />
+        <Route path="/payment/verify" element={<PaymentVerification />} />
       </Route>
     </Routes>
   );

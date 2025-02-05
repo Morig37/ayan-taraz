@@ -1,5 +1,5 @@
 import { CacheProvider } from '@emotion/react';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
@@ -15,19 +15,19 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <CacheProvider value={cacheRtl}>
-      <ThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
             <BrowserRouter>
               <Routes />
-               <ThemeProvider>
-               </ThemeProvider>
-               <ChatBox />
-              <ToastContainer position="bottom-left" rtl />
+              <ThemeProvider>
+                <ChatBox />
+                <ToastContainer position="bottom-left" rtl />
+              </ThemeProvider>
             </BrowserRouter>
           </QueryClientProvider>
         </HelmetProvider>
-      </ThemeProvider>
+      </MuiThemeProvider>
     </CacheProvider>
   );
 }

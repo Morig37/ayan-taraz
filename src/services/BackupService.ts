@@ -1,4 +1,3 @@
-// src/services/BackupService.ts
 import { BackupConfig, BackupFile } from '../types/backup';
 
 export class BackupService {
@@ -72,4 +71,8 @@ export class BackupService {
         body: JSON.stringify(config),
       });
     } catch (error) {
-      console.error
+      console.error('Error updating config:', error);
+      throw error;
+    }
+  }
+}

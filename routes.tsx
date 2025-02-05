@@ -14,6 +14,10 @@ import {
 } from './pages';
 import { TaxCalendarPage } from './pages/TaxCalendar';
 
+{
+  path: '/payment/verify',
+  element: <PaymentVerification />
+}
 export default function AppRoutes() {
   return (
     <Routes>

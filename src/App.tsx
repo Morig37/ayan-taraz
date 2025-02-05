@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { theme } from './theme';
 import { cacheRtl } from './utils/rtl';
 import Routes from './routes';
+import { ChatBox } from './components/chat/ChatBox';
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <BrowserRouter>
               <Routes />
+              <ChatBox />
               <ToastContainer position="bottom-left" rtl />
             </BrowserRouter>
           </QueryClientProvider>

@@ -10,7 +10,7 @@
     "react-dom": "^18.x",
     "react-router-dom": "^6.x",
     "yup": "^1.x",
-    "zarinpal-checkout": "^1.x"
+     "zarinpal-checkout": "^0.2.7"
   },
   "devDependencies": {
     "@types/react": "^18.x",

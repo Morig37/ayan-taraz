@@ -8,6 +8,7 @@ import { theme } from './theme';
 import { cacheRtl } from './utils/rtl';
 import Routes from './routes';
 import { ChatBox } from './components/chat/ChatBox';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,9 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <BrowserRouter>
               <Routes />
-              <ChatBox />
+               <ThemeProvider>
+               </ThemeProvider>
+               <ChatBox />
               <ToastContainer position="bottom-left" rtl />
             </BrowserRouter>
           </QueryClientProvider>

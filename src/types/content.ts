@@ -1,10 +1,17 @@
-// src/types/content.ts
-export interface Author {
+export interface Content {
+  id?: string;
+  title: string;
+  summary: string;
+  content: string;
+  category: {
     id: string;
     name: string;
-    avatar?: string;
-    bio?: string;
-  }
+  };
+  tags: string[];
+  thumbnail?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
   
   export interface Category {
     id: string;

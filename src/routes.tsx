@@ -1,19 +1,17 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
-import {
-  Home,
-  Videos,
-  Articles,
-  Tutorials,
-  Registration,
-  Collaboration,
-  TaxCalculator,
-  MiniBook,
-  Survey,
-  ConsultationRequest,
-} from './pages';
-import { TaxCalendarPage } from './pages/TaxCalendar';
+import Home from './pages/Home';
+import Videos from './pages/Videos';
+import Articles from './pages/Articles';
+import Tutorials from './pages/Tutorials';
+import Registration from './pages/Registration';
+import Collaboration from './pages/Collaboration';
+import TaxCalculator from './pages/TaxCalculator';
+import MiniBook from './pages/MiniBook';
+import Survey from './pages/Survey';
+import ConsultationRequest from './pages/ConsultationRequest';
+import TaxCalendarPage from './pages/TaxCalendar';
 import PaymentVerification from './pages/PaymentVerification';
 
 export default function AppRoutes() {
@@ -30,8 +28,8 @@ export default function AppRoutes() {
         <Route path="mini-book" element={<MiniBook />} />
         <Route path="survey" element={<Survey />} />
         <Route path="consultation" element={<ConsultationRequest />} />
-        <Route path="/tax-calendar" element={<TaxCalendarPage />} />
-        <Route path="/payment/verify" element={<PaymentVerification />} />
+        <Route path="tax-calendar" element={<TaxCalendarPage />} />
+        <Route path="payment/verify" element={<PaymentVerification />} />
       </Route>
     </Routes>
   );

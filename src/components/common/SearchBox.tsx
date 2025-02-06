@@ -1,4 +1,3 @@
-// src/components/common/SearchBox.tsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -52,14 +51,12 @@ export const SearchBox = () => {
       <Popper
         open={Boolean(anchorEl) && searchTerm.length > 0}
         anchorEl={anchorEl}
-        onClose={() => setAnchorEl(null)}
-        placement="bottom-start"
+        placement="bottom-start" // بررسی کنید که این مقدار صحیح است
       >
         <Paper sx={{ width: 250, maxHeight: 300, overflow: 'auto' }}>
           <List>
-            {/* نتایج جستجو را اینجا نمایش دهید */}
             <ListItem button>
-              <ListItemText primary="نتیجه جستجو" />
+              <ListItemText primary="تعليق جديد" />
             </ListItem>
           </List>
         </Paper>

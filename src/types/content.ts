@@ -1,26 +1,27 @@
-export interface Author {
+export interface Content {
   id: string;
-  name: string;
-  email: string;
+  title: string;
+  content: string;
+  author: {
+    id: string;
+    name: string;
+    avatar?: string;
+  };
+  category: Category;
+  status: ContentStatus;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Category {
   id: string;
-  name: string;
-}
-
-export interface Content {
-  id: string;
   title: string;
   slug: string;
-  summary: string;
-  content: string;
-  thumbnail?: string;
-  author: Author;
-  category: Category;
+}
+
+export type ContentStatus = 'draft' | 'published' | 'archived';
+
+export interface Article extends Content {
+  excerpt: string;
   tags: string[];
-  createdAt: string;
-  updatedAt: string;
-  readTime?: number;
-  viewCount?: number;
 }

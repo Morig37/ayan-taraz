@@ -1,4 +1,3 @@
-// src/types/error.ts
 export type ErrorSeverity = 'info' | 'warning' | 'error' | 'critical';
 export type ErrorSource = 'client' | 'server' | 'network' | 'validation';
 

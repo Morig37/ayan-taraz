@@ -1,5 +1,4 @@
-// src/services/AuthService.ts
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { AuthResponse, LoginCredentials, TokenPayload, User } from '../types/auth';
 
 export class AuthService {

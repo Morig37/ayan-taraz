@@ -1,4 +1,3 @@
-// src/hooks/useError.ts
 import { useState, useCallback } from 'react';
 import { ErrorService } from '../services/ErrorService';
 import { ErrorLog } from '../types/error';
@@ -21,7 +20,7 @@ export const useError = () => {
           ...context,
           url: window.location.href,
           timestamp: new Date().toISOString(),
-          user: 'Mojim37', // کاربر فعلی
+          user: 'Mojim37',
         },
       });
     } finally {

@@ -1,4 +1,3 @@
-// src/pages/Registration.tsx
 import React from 'react';
 import {
   Container,
@@ -12,6 +11,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { StyledTextField } from '../components/common/FormFields';
 
+try {
+  console.log('Form submitted:', values);
+} catch (error) {
+  console.error('Registration error:', error);
+}
 const validationSchema = Yup.object({
   firstName: Yup.string()
     .required('نام الزامی است')

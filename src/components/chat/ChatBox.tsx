@@ -51,6 +51,17 @@ const MessageBubble = styled(Box, {
   color: isUser ? theme.palette.primary.contrastText : theme.palette.text.primary,
 }));
 
+const handleAction = (action: { type: string; payload?: any }) => {
+  switch (action.type) {
+    case 'CALCULATE_TAX':
+      navigate('/tax-calculator');
+      break;
+    case 'BOOK_CONSULTATION':
+      navigate('/consultation');
+      break;
+    // اضافه کردن اکشن‌های دیگر
+  }
+};
 export const ChatBox = () => {
   const theme = useTheme();
   const navigate = useNavigate();

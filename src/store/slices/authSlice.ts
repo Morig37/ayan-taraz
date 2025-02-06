@@ -1,41 +1,50 @@
-// src/store/slices/authSlice.ts
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { AuthState } from '../../types/state';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { AuthState } from '../../types/user';
+import { LoginCredentials, LoginResponse, AuthError } from '../../types/auth';
 import { AuthService } from '../../services/AuthService';
 
 const initialState: AuthState = {
   user: null,
-  token: localStorage.getItem('token'),
+  token: null,
   isAuthenticated: false,
   loading: false,
-  error: null,
+  error: null
 };
 
-export const login = createAsyncThunk(
-  'auth/login',
-  async (credentials: { username: string; password: string }) => {
+export const login = createAsyncThunk<
+  LoginResponse,
+  LoginCredentials,
+  { rejectValue: AuthError }
+>('auth/login', async (credentials, { rejectWithValue }) => {
+  try {
     const response = await AuthService.login(credentials);
-    localStorage.setItem('token', response.token);
     return response;
+  } catch (error: any) {
+    return rejectWithValue({
+      message: error.message || 'خطا در ورود به سیستم',
+      code: error.code || 'AUTH_ERROR'
+    });
   }
-);
+});
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   await AuthService.logout();
-  localStorage.removeItem('token');
-});
-
-export const getCurrentUser = createAsyncThunk('auth/getCurrentUser', async () => {
-  return await AuthService.getCurrentUser();
 });
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    clearError: (state) => {
-      state.error = null;
+    setCredentials: (state, action: PayloadAction<LoginResponse>) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isAuthenticated = true;
     },
+    clearCredentials: (state) => {
+      state.user = null;
+      state.token = null;
+      state.isAuthenticated = false;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -51,19 +60,15 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'خطا در ورود';
+        state.error = action.payload?.message || 'خطای ناشناخته';
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.token = null;
         state.isAuthenticated = false;
-      })
-      .addCase(getCurrentUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isAuthenticated = true;
       });
-  },
+  }
 });
 
-export const { clearError } = authSlice.actions;
+export const { setCredentials, clearCredentials } = authSlice.actions;
 export default authSlice.reducer;

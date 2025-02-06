@@ -1,34 +1,28 @@
-// src/hooks/useStore.ts
-import {
-    TypedUseSelectorHook,
-    useDispatch as useReduxDispatch,
-    useSelector as useReduxSelector,
-  } from 'react-redux';
-  import type { RootState, AppDispatch } from '../store';
-  
-  export const useDispatch = () => useReduxDispatch<AppDispatch>();
-  export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
-  
-  export const useAuth = () => {
-    return useSelector((state) => state.auth);
+import { useAppSelector, useAppDispatch } from '../store';
+import { setLoading, setError, clearError } from '../store/slices/uiSlice';
+import { login, logout } from '../store/slices/authSlice';
+import { LoginCredentials } from '../types/auth';
+
+export const useAuth = () => {
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.auth);
+
+  return {
+    ...auth,
+    login: (credentials: LoginCredentials) => dispatch(login(credentials)),
+    logout: () => dispatch(logout())
   };
-  
-  export const useUI = () => {
-    return useSelector((state) => state.ui);
+};
+
+export const useUI = () => {
+  const dispatch = useAppDispatch();
+  return {
+    loading: (key: string) => useAppSelector((state) => state.ui.loading[key] || false),
+    error: (key: string) => useAppSelector((state) => state.ui.errors[key]),
+    setLoading: (key: string, isLoading: boolean) =>
+      dispatch(setLoading({ key, isLoading })),
+    setError: (key: string, error: string | null) =>
+      dispatch(setError({ key, error })),
+    clearError: (key: string) => dispatch(clearError(key))
   };
-  
-  export const useLoading = (key: string) => {
-    return useSelector((state) => state.ui.loading[key] || false);
-  };
-  
-  export const useError = (key: string) => {
-    return useSelector((state) => state.ui.errors[key]);
-  };
-  
-  export const useCache = (key: string) => {
-    const cache = useSelector((state) => state.cache[key]);
-    if (!cache || Date.now() > cache.expiresAt) {
-      return null;
-    }
-    return cache.data;
-  };
+};

@@ -1,67 +1,47 @@
-// src/components/admin/users/UsersList.tsx
 import React, { useState } from 'react';
 import {
-  Box,
-  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  IconButton,
+  Paper,
   Avatar,
   Chip,
+  IconButton,
   Menu,
   MenuItem,
+  Box,
   TextField,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  FormControl,
-  InputLabel,
-  Select,
+  InputAdornment
 } from '@mui/material';
 import {
+  MoreVert,
   Edit,
   Delete,
-  Block,
-  CheckCircle,
-  MoreVert,
-  Add,
   Search,
 } from '@mui/icons-material';
-import { User, UserRole } from '../../../types/user';
+import { User } from '../../../types/user';
 
 interface UsersListProps {
   users: User[];
-  onDelete: (id: string) => void;
-  onStatusChange: (id: string, status: string) => void;
-  onRoleChange: (id: string, role: UserRole) => void;
+  onEdit?: (userId: string) => void;
+  onDelete?: (userId: string) => void;
+  onStatusChange?: (userId: string, newStatus: 'active' | 'inactive') => void;
 }
-
-const roleColors = {
-  admin: 'error',
-  manager: 'warning',
-  editor: 'info',
-  user: 'default',
-} as const;
 
 export const UsersList: React.FC<UsersListProps> = ({
   users,
+  onEdit,
   onDelete,
-  onStatusChange,
-  onRoleChange,
+  onStatusChange
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [roleDialogOpen, setRoleDialogOpen] = useState(false);
-  const [newRole, setNewRole] = useState<UserRole>('user');
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, user: User) => {
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>, user: User) => {
     setAnchorEl(event.currentTarget);
     setSelectedUser(user);
   };
@@ -69,18 +49,6 @@ export const UsersList: React.FC<UsersListProps> = ({
   const handleMenuClose = () => {
     setAnchorEl(null);
     setSelectedUser(null);
-  };
-
-  const handleRoleDialogOpen = () => {
-    setRoleDialogOpen(true);
-    handleMenuClose();
-  };
-
-  const handleRoleChange = () => {
-    if (selectedUser) {
-      onRoleChange(selectedUser.id, newRole);
-    }
-    setRoleDialogOpen(false);
   };
 
   const filteredUsers = users.filter(
@@ -91,30 +59,22 @@ export const UsersList: React.FC<UsersListProps> = ({
   );
 
   return (
-    <Paper sx={{ p: 2 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-        <Box sx={{ display: 'flex', gap: 2, flexGrow: 1 }}>
-          <TextField
-            size="small"
-            placeholder="جستجوی کاربر..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            InputProps={{
-              startAdornment: <Search />,
-            }}
-            sx={{ width: 300 }}
-          />
-        </Box>
-        <Button
-          variant="contained"
-          startIcon={<Add />}
-          onClick={() => {/* ناوبری به فرم افزودن کاربر */}}
-        >
-          افزودن کاربر
-        </Button>
-      </Box>
-
-      <TableContainer>
+    <Box>
+      <TextField
+        fullWidth
+        margin="normal"
+        placeholder="جستجوی کاربر..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Search />
+            </InputAdornment>
+          ),
+        }}
+      />
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
@@ -145,7 +105,7 @@ export const UsersList: React.FC<UsersListProps> = ({
                 <TableCell>
                   <Chip
                     label={user.role}
-                    color={roleColors[user.role]}
+                    color="primary"
                     size="small"
                   />
                 </TableCell>
@@ -164,7 +124,7 @@ export const UsersList: React.FC<UsersListProps> = ({
                 <TableCell>
                   <IconButton
                     size="small"
-                    onClick={(e) => handleMenuOpen(e, user)}
+                    onClick={(e) => handleMenuClick(e, user)}
                   >
                     <MoreVert />
                   </IconButton>
@@ -180,12 +140,19 @@ export const UsersList: React.FC<UsersListProps> = ({
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleRoleDialogOpen}>
-          تغییر نقش
+        <MenuItem
+          onClick={() => {
+            if (selectedUser && onEdit) {
+              onEdit(selectedUser.id);
+            }
+            handleMenuClose();
+          }}
+        >
+          <Edit sx={{ mr: 1 }} /> ویرایش
         </MenuItem>
         <MenuItem
           onClick={() => {
-            if (selectedUser) {
+            if (selectedUser && onStatusChange) {
               onStatusChange(
                 selectedUser.id,
                 selectedUser.status === 'active' ? 'inactive' : 'active'
@@ -198,39 +165,16 @@ export const UsersList: React.FC<UsersListProps> = ({
         </MenuItem>
         <MenuItem
           onClick={() => {
-            if (selectedUser) onDelete(selectedUser.id);
+            if (selectedUser && onDelete) {
+              onDelete(selectedUser.id);
+            }
             handleMenuClose();
           }}
           sx={{ color: 'error.main' }}
         >
-          حذف کاربر
+          <Delete sx={{ mr: 1 }} /> حذف
         </MenuItem>
       </Menu>
-
-      <Dialog open={roleDialogOpen} onClose={() => setRoleDialogOpen(false)}>
-        <DialogTitle>تغییر نقش کاربر</DialogTitle>
-        <DialogContent>
-          <FormControl fullWidth sx={{ mt: 2 }}>
-            <InputLabel>نقش جدید</InputLabel>
-            <Select
-              value={newRole}
-              onChange={(e) => setNewRole(e.target.value as UserRole)}
-              label="نقش جدید"
-            >
-              <MenuItem value="admin">مدیر</MenuItem>
-              <MenuItem value="manager">مدیر محتوا</MenuItem>
-              <MenuItem value="editor">ویراستار</MenuItem>
-              <MenuItem value="user">کاربر عادی</MenuItem>
-            </Select>
-          </FormControl>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setRoleDialogOpen(false)}>انصراف</Button>
-          <Button onClick={handleRoleChange} variant="contained">
-            تایید
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Paper>
+    </Box>
   );
 };

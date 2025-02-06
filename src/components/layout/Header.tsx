@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { useState } from 'react';
 import {
   AppBar,
@@ -8,94 +7,109 @@ import {
   Typography,
   Menu,
   Container,
+  Avatar,
   Button,
-  MenuItem,
+  Tooltip,
+  MenuItem
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { SearchBox } from '../common/SearchBox';
-import { Link } from 'react-router-dom';
+import { Menu as MenuIcon } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/types';
 
-const pages = [
-  { title: 'مقالات', path: '/articles' },
-  { title: 'آموزش‌ها', path: '/tutorials' },
-  { title: 'ثبت‌نام', path: '/register' },
-  { title: 'نحوه همکاری', path: '/cooperation' },
-  { title: 'محاسبه مالیات', path: '/tax-calculator' },
-  { title: 'مشاوره', path: '/consultation' },
-  { title: 'نظرات', path: '/feedback' },
-  { title: 'مینی بوک', path: '/mini-book' },
-];
+interface HeaderProps {
+  onDrawerToggle?: () => void;
+}
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const Header: React.FC = () =>
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
     <AppBar position="sticky" sx={{ bgcolor: 'secondary.main' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={onDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          
           <Typography
             variant="h6"
             noWrap
-            component={Link}
-            to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontWeight: 700,
-              color: 'primary.main',
+              color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            آیان تراز
+            آیان طراز
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              onClick={(e) => setAnchorElNav(e.currentTarget)}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchorElNav}
-              open={Boolean(anchorElNav)}
-              onClose={() => setAnchorElNav(null)}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-              {pages.map((page) => (
-                <MenuItem 
-                  key={page.path}
-                  component={Link}
-                  to={page.path}
-                  onClick={() => setAnchorElNav(null)}
-                >
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
-            {pages.map((page) => (
-              <Button
-                key={page.path}
-                component={Link}
-                to={page.path}
-                sx={{
-                  color: 'primary.main',
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                    color: 'secondary.main',
-                  }
+          {user ? (
+            <Box sx={{ flexGrow: 0, ml: 2 }}>
+              <Tooltip title="تنظیمات کاربری">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt={user.firstName} src={user.avatar} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
                 }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
               >
-                {page.title}
-              </Button>
-            ))}
-          </Box>
-
-          <SearchBox />
+                <MenuItem onClick={() => navigate('/profile')}>
+                  <Typography textAlign="center">پروفایل</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => navigate('/settings')}>
+                  <Typography textAlign="center">تنظیمات</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => navigate('/logout')}>
+                  <Typography textAlign="center">خروج</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          ) : (
+            <Button color="inherit" onClick={() => navigate('/login')}>
+              ورود
+            </Button>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

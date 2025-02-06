@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useAuth, useUI } from '../useStore';
 import authReducer from '../../store/slices/authSlice';
 import uiReducer from '../../store/slices/uiSlice';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 const createTestStore = () =>
   configureStore({
@@ -14,7 +14,7 @@ const createTestStore = () =>
     }
   });
 
-const TestWrapper: React.FC<PropsWithChildren> = ({ children }) => {
+const TestWrapper: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const store = createTestStore();
   return <Provider store={store}>{children}</Provider>;
 };

@@ -1,4 +1,4 @@
-// src/components/layout/Header.tsx
+import React from 'react';
 import React, { useState } from 'react';
 import {
   AppBar,
@@ -28,7 +28,7 @@ const pages = [
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-
+  const Header: React.FC = () =>
   return (
     <AppBar position="sticky" sx={{ bgcolor: 'secondary.main' }}>
       <Container maxWidth="xl">

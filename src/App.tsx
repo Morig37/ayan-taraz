@@ -5,54 +5,48 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Add toast styles
-
+import { Provider } from 'react-redux';
 import { theme } from './theme';
 import { cacheRtl } from './utils/rtl';
 import Routes from './routes';
-import { ChatBox } from './components/chat/ChatBox';
-import { ThemeProvider } from './contexts/ThemeContext';
+import { store } from './store';
+import { ErrorService } from './services/ErrorService';
 
-// Configure QueryClient
+// Initialize error handling
+ErrorService.handleGlobalErrors();
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
       retry: 1,
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
     },
   },
 });
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <CacheProvider value={cacheRtl}>
-          <MuiThemeProvider theme={theme}>
-            <ThemeProvider>
+    <Provider store={store}>
+      <CacheProvider value={cacheRtl}>
+        <MuiThemeProvider theme={theme}>
+          <HelmetProvider>
+            <QueryClientProvider client={queryClient}>
               <BrowserRouter>
-                <div className="app-container">
-                  <Routes />
-                  <ChatBox />
-                  <ToastContainer
-                    position="bottom-left"
-                    rtl
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop
-                    closeOnClick
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                  />
-                </div>
+                <Routes />
+                <ToastContainer
+                  position="bottom-left"
+                  rtl
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  closeOnClick
+                  pauseOnHover
+                />
               </BrowserRouter>
-            </ThemeProvider>
-          </MuiThemeProvider>
-        </CacheProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+            </QueryClientProvider>
+          </HelmetProvider>
+        </MuiThemeProvider>
+      </CacheProvider>
+    </Provider>
   );
 }
 

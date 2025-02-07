@@ -1,15 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import 'react-toastify/dist/ReactToastify.css';
-import './index.css';
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './store/slices/authSlice';
+import uiReducer from './store/slices/uiSlice';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const store = configureStore({
+  reducer: {
+    auth: authReducer,
+    ui: uiReducer
+  }
+});
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export default store;

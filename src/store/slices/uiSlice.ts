@@ -1,11 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-interface UIState {
-  isLoading: boolean;
-  error: string | null;
-}
-
-const initialState: UIState = {
+const initialState = {
   isLoading: false,
   error: null
 };
@@ -14,10 +9,10 @@ const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
+    setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
-    setError: (state, action: PayloadAction<string | null>) => {
+    setError: (state, action) => {
       state.error = action.payload;
     }
   }

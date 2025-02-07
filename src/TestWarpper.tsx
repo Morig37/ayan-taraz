@@ -1,17 +1,12 @@
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './store';
+import TestWrapper from './TestWrapper';
 
-interface TestWrapperProps {
-  children: React.ReactNode;
-}
-
-const TestWrapper: React.FC<TestWrapperProps> = ({ children }) => {
-  return (
-    <Provider store={store}>
-      {children}
-    </Provider>
+export const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <TestWrapper>
+      {ui}
+    </TestWrapper>
   );
 };
-
-export default TestWrapper;

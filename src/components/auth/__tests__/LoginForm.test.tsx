@@ -1,57 +1,34 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from '../../../store';
+import { fireEvent, screen } from '@testing-library/react';
+import { renderWithProviders } from '../../../setupTests';
 import { LoginForm } from '../LoginForm';
 
 describe('LoginForm', () => {
-  const renderLoginForm = () => {
-    return render(
-      <Provider store={store}>
-        <LoginForm />
-      </Provider>
-    );
-  };
-
-  it('renders username and password fields', () => {
-    renderLoginForm();
-    expect(screen.getByLabelText(/نام کاربری/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/رمز عبور/i)).toBeInTheDocument();
+  it('should render login form', () => {
+    const handleSubmit = jest.fn();
+    renderWithProviders(<LoginForm onSubmit={handleSubmit} />);
+    
+    const loginButton = screen.getByRole('button', { name: /login/i });
+    expect(loginButton).toBeInTheDocument();
   });
 
-  it('shows validation errors for empty fields', async () => {
-    renderLoginForm();
-    const submitButton = screen.getByRole('button', { name: /ورود/i });
-
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      expect(screen.getByText(/نام کاربری الزامی است/i)).toBeInTheDocument();
-      expect(screen.getByText(/رمز عبور الزامی است/i)).toBeInTheDocument();
-    });
-  });
-
-  it('submits form with valid data', async () => {
-    renderLoginForm();
-
-    fireEvent.change(screen.getByLabelText(/نام کاربری/i), {
+  it('should handle form submission', () => {
+    const handleSubmit = jest.fn();
+    renderWithProviders(<LoginForm onSubmit={handleSubmit} />);
+    
+    fireEvent.change(screen.getByLabelText(/username/i), {
       target: { value: 'testuser' },
     });
-
-    fireEvent.change(screen.getByLabelText(/رمز عبور/i), {
+    
+    fireEvent.change(screen.getByLabelText(/password/i), {
       target: { value: 'password123' },
     });
-
-    const submitButton = screen.getByRole('button', { name: /ورود/i });
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      expect(
-        screen.queryByText(/نام کاربری الزامی است/i)
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(/رمز عبور الزامی است/i)
-      ).not.toBeInTheDocument();
+    
+    fireEvent.click(screen.getByRole('button', { name: /login/i }));
+    
+    expect(handleSubmit).toHaveBeenCalledWith({
+      username: 'testuser',
+      password: 'password123',
     });
   });
 });

@@ -58,7 +58,7 @@ const ArticleDetail = () => {
           <Divider sx={{ my: 3 }} />
 
           <Box sx={{ display: 'flex', gap: 1 }}>
-            {['مالیات', 'حسابداری', 'کسب و کار'].map((tag) => (
+            {['مالیات', 'حسابداری', 'کسب و کار'].map(tag => (
               <Chip key={tag} label={tag} />
             ))}
           </Box>

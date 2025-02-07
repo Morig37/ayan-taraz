@@ -56,7 +56,12 @@ export const AdminDashboard: React.FC<Props> = ({
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const StatCard = ({ title, value, icon, trend }: { 
+  const StatCard = ({
+    title,
+    value,
+    icon,
+    trend,
+  }: {
     title: string;
     value: number;
     icon: React.ReactNode;
@@ -68,15 +73,15 @@ export const AdminDashboard: React.FC<Props> = ({
           <Typography variant="subtitle2" color="text.secondary">
             {title}
           </Typography>
-          <Typography variant="h4">
-            {formatNumber(value)}
-          </Typography>
+          <Typography variant="h4">{formatNumber(value)}</Typography>
         </Box>
-        <Box sx={{ 
-          p: 1.5,
-          borderRadius: '50%',
-          bgcolor: theme.palette.primary.light 
-        }}>
+        <Box
+          sx={{
+            p: 1.5,
+            borderRadius: '50%',
+            bgcolor: theme.palette.primary.light,
+          }}
+        >
           {icon}
         </Box>
       </Box>
@@ -112,19 +117,19 @@ export const AdminDashboard: React.FC<Props> = ({
               value={stats.systemHealth.cpu}
               color={stats.systemHealth.cpu > 80 ? 'error' : 'primary'}
             />
-            <Box sx={{
-              position: 'absolute',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-            }}>
-              <Typography variant="caption">
-                CPU
-              </Typography>
+            <Box
+              sx={{
+                position: 'absolute',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+              }}
+            >
+              <Typography variant="caption">CPU</Typography>
             </Box>
           </Box>
         </Grid>
@@ -136,15 +141,13 @@ export const AdminDashboard: React.FC<Props> = ({
   const RecentActivities = () => (
     <Paper sx={{ p: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-        <Typography variant="h6">
-          فعالیت‌های اخیر
-        </Typography>
+        <Typography variant="h6">فعالیت‌های اخیر</Typography>
         <IconButton size="small" onClick={onRefresh}>
           <Refresh />
         </IconButton>
       </Box>
       <Box sx={{ maxHeight: 400, overflow: 'auto' }}>
-        {stats.recentActivities.map((activity) => (
+        {stats.recentActivities.map(activity => (
           <Box
             key={activity.id}
             sx={{
@@ -154,11 +157,10 @@ export const AdminDashboard: React.FC<Props> = ({
               '&:last-child': { borderBottom: 0 },
             }}
           >
-            <Typography variant="subtitle2">
-              {activity.action}
-            </Typography>
+            <Typography variant="subtitle2">{activity.action}</Typography>
             <Typography variant="body2" color="text.secondary">
-              {activity.user} • {new Date(activity.timestamp).toLocaleTimeString('fa-IR')}
+              {activity.user} •{' '}
+              {new Date(activity.timestamp).toLocaleTimeString('fa-IR')}
             </Typography>
           </Box>
         ))}
@@ -171,21 +173,22 @@ export const AdminDashboard: React.FC<Props> = ({
       <Typography variant="h6" gutterBottom>
         هشدارها
       </Typography>
-      {stats.alerts.map((alert) => (
+      {stats.alerts.map(alert => (
         <Box
           key={alert.id}
           sx={{
             p: 1,
             mb: 1,
             borderRadius: 1,
-            bgcolor: alert.type === 'error' ? 'error.light' :
-                    alert.type === 'warning' ? 'warning.light' :
-                    'info.light',
+            bgcolor:
+              alert.type === 'error'
+                ? 'error.light'
+                : alert.type === 'warning'
+                  ? 'warning.light'
+                  : 'info.light',
           }}
         >
-          <Typography variant="body2">
-            {alert.message}
-          </Typography>
+          <Typography variant="body2">{alert.message}</Typography>
           <Typography variant="caption" color="text.secondary">
             {new Date(alert.timestamp).toLocaleString('fa-IR')}
           </Typography>
@@ -209,7 +212,7 @@ export const AdminDashboard: React.FC<Props> = ({
           >
             بروزرسانی
           </Button>
-          <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+          <IconButton onClick={e => setAnchorEl(e.currentTarget)}>
             <MoreVert />
           </IconButton>
         </Box>
@@ -267,7 +270,13 @@ export const AdminDashboard: React.FC<Props> = ({
                 آمار فروش
               </Typography>
               <ResponsiveContainer width="100%" height={300}>
-                <AreaChart data={[/* داده‌های نمودار */]}>
+                <AreaChart
+                  data={
+                    [
+                      /* داده‌های نمودار */
+                    ]
+                  }
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
@@ -302,16 +311,20 @@ export const AdminDashboard: React.FC<Props> = ({
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem onClick={() => {
-          setAnchorEl(null);
-          // اکسپورت داشبورد به PDF
-        }}>
+        <MenuItem
+          onClick={() => {
+            setAnchorEl(null);
+            // اکسپورت داشبورد به PDF
+          }}
+        >
           خروجی PDF
         </MenuItem>
-        <MenuItem onClick={() => {
-          setAnchorEl(null);
-          // تنظیمات داشبورد
-        }}>
+        <MenuItem
+          onClick={() => {
+            setAnchorEl(null);
+            // تنظیمات داشبورد
+          }}
+        >
           تنظیمات
         </MenuItem>
       </Menu>

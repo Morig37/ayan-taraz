@@ -8,7 +8,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  FormHelperText
+  FormHelperText,
 } from '@mui/material';
 
 export interface FormField {
@@ -21,7 +21,14 @@ export interface FormField {
 }
 
 interface ValidationRule {
-  type: 'required' | 'email' | 'min' | 'max' | 'minLength' | 'maxLength' | 'pattern';
+  type:
+    | 'required'
+    | 'email'
+    | 'min'
+    | 'max'
+    | 'minLength'
+    | 'maxLength'
+    | 'pattern';
   message: string;
   params?: number | string | RegExp;
 }
@@ -31,7 +38,10 @@ interface DynamicFormProps {
   onSubmit: (data: any) => void;
 }
 
-export const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit }) => {
+export const DynamicForm: React.FC<DynamicFormProps> = ({
+  fields,
+  onSubmit,
+}) => {
   const schema = yup.object().shape(
     fields.reduce((acc, field) => {
       let validator: yup.AnySchema = yup.mixed();
@@ -69,12 +79,12 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit }) =>
   );
 
   const { control, handleSubmit } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {fields.map((field) => (
+      {fields.map(field => (
         <Controller
           key={field.name}
           name={field.name}
@@ -91,7 +101,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit }) =>
                     label={field.label}
                     multiple={field.multiple}
                   >
-                    {field.options?.map((option) => (
+                    {field.options?.map(option => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.label}
                       </MenuItem>

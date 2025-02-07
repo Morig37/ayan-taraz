@@ -1,23 +1,32 @@
-import { PropsWithChildren } from 'react';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
+import store from './store';
 import { useAuth, useUI } from './hooks/useStore';
-import authReducer from './store/slices/authSlice';
-import uiReducer from './store/slices/uiSlice';
+import TestWrapper from './TestWrapper';
 
-const TestWrapper = ({ children }: PropsWithChildren) => {
-  const store = configureStore({
-    reducer: {
-      auth: authReducer,
-      ui: uiReducer,
-    },
-  });
-
+// Create a reusable test component
+export const TestComponent = () => {
+  const auth = useAuth();
+  const ui = useUI();
+  
   return (
-    <Provider store={store}>
-      {children}
-    </Provider>
+    <div>
+      <div>Auth: {JSON.stringify(auth)}</div>
+      <div>UI: {JSON.stringify(ui)}</div>
+    </div>
   );
 };
 
-export default TestWrapper;
+// Custom render method
+export const renderWithProviders = (
+  ui: React.ReactElement,
+  { initialState = {} } = {}
+) => {
+  return render(
+    <TestWrapper>
+      {ui}
+    </TestWrapper>
+  );
+};

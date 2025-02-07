@@ -14,14 +14,9 @@ import {
   MenuItem,
   Box,
   TextField,
-  InputAdornment
+  InputAdornment,
 } from '@mui/material';
-import {
-  MoreVert,
-  Edit,
-  Delete,
-  Search,
-} from '@mui/icons-material';
+import { MoreVert, Edit, Delete, Search } from '@mui/icons-material';
 import { User } from '../../../types/user';
 
 interface UsersListProps {
@@ -35,13 +30,16 @@ export const UsersList: React.FC<UsersListProps> = ({
   users,
   onEdit,
   onDelete,
-  onStatusChange
+  onStatusChange,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
-  const handleMenuClick = (event: React.MouseEvent<HTMLElement>, user: User) => {
+  const handleMenuClick = (
+    event: React.MouseEvent<HTMLElement>,
+    user: User
+  ) => {
     setAnchorEl(event.currentTarget);
     setSelectedUser(user);
   };
@@ -52,7 +50,7 @@ export const UsersList: React.FC<UsersListProps> = ({
   };
 
   const filteredUsers = users.filter(
-    (user) =>
+    user =>
       user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -65,7 +63,7 @@ export const UsersList: React.FC<UsersListProps> = ({
         margin="normal"
         placeholder="جستجوی کاربر..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={e => setSearchTerm(e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -88,26 +86,20 @@ export const UsersList: React.FC<UsersListProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredUsers.map((user) => (
+            {filteredUsers.map(user => (
               <TableRow key={user.id}>
                 <TableCell>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Avatar src={user.avatar} alt={user.firstName}>
                       {user.firstName[0]}
                     </Avatar>
-                    <Box>
-                      {`${user.firstName} ${user.lastName}`}
-                    </Box>
+                    <Box>{`${user.firstName} ${user.lastName}`}</Box>
                   </Box>
                 </TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.mobile}</TableCell>
                 <TableCell>
-                  <Chip
-                    label={user.role}
-                    color="primary"
-                    size="small"
-                  />
+                  <Chip label={user.role} color="primary" size="small" />
                 </TableCell>
                 <TableCell>
                   <Chip
@@ -124,7 +116,7 @@ export const UsersList: React.FC<UsersListProps> = ({
                 <TableCell>
                   <IconButton
                     size="small"
-                    onClick={(e) => handleMenuClick(e, user)}
+                    onClick={e => handleMenuClick(e, user)}
                   >
                     <MoreVert />
                   </IconButton>

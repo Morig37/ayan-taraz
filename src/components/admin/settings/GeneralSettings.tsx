@@ -37,7 +37,7 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
   const formik = useFormik({
     initialValues: settings,
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
         await onSave(values);
       } catch (error) {
@@ -110,8 +110,13 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
               label="توضیحات سایت"
               value={formik.values.siteDescription}
               onChange={formik.handleChange}
-              error={formik.touched.siteDescription && Boolean(formik.errors.siteDescription)}
-              helperText={formik.touched.siteDescription && formik.errors.siteDescription}
+              error={
+                formik.touched.siteDescription &&
+                Boolean(formik.errors.siteDescription)
+              }
+              helperText={
+                formik.touched.siteDescription && formik.errors.siteDescription
+              }
             />
           </Grid>
 
@@ -122,8 +127,13 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
               label="ایمیل تماس"
               value={formik.values.contactEmail}
               onChange={formik.handleChange}
-              error={formik.touched.contactEmail && Boolean(formik.errors.contactEmail)}
-              helperText={formik.touched.contactEmail && formik.errors.contactEmail}
+              error={
+                formik.touched.contactEmail &&
+                Boolean(formik.errors.contactEmail)
+              }
+              helperText={
+                formik.touched.contactEmail && formik.errors.contactEmail
+              }
             />
           </Grid>
 
@@ -134,8 +144,13 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
               label="شماره تماس"
               value={formik.values.contactPhone}
               onChange={formik.handleChange}
-              error={formik.touched.contactPhone && Boolean(formik.errors.contactPhone)}
-              helperText={formik.touched.contactPhone && formik.errors.contactPhone}
+              error={
+                formik.touched.contactPhone &&
+                Boolean(formik.errors.contactPhone)
+              }
+              helperText={
+                formik.touched.contactPhone && formik.errors.contactPhone
+              }
             />
           </Grid>
 

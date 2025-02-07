@@ -3,7 +3,9 @@ import { BackupConfig, BackupFile } from '../types/backup';
 export class BackupService {
   private static readonly API_URL = '/api/backup';
 
-  static async createBackup(config: Partial<BackupConfig>): Promise<BackupFile> {
+  static async createBackup(
+    config: Partial<BackupConfig>
+  ): Promise<BackupFile> {
     try {
       const response = await fetch(`${this.API_URL}/create`, {
         method: 'POST',

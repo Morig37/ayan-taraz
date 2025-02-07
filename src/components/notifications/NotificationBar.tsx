@@ -61,7 +61,7 @@ export const NotificationBar: React.FC<NotificationBarProps> = ({
   const theme = useTheme();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  const unreadCount = notifications.filter(n => !n.read).length;
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -116,7 +116,7 @@ export const NotificationBar: React.FC<NotificationBarProps> = ({
         <Divider />
         <List sx={{ p: 0 }}>
           {notifications.length > 0 ? (
-            notifications.map((notification) => (
+            notifications.map(notification => (
               <ListItem
                 key={notification.id}
                 button

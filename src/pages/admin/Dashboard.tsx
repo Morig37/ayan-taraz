@@ -1,4 +1,3 @@
-// src/pages/admin/Dashboard.tsx
 import React from 'react';
 import {
   Grid,
@@ -17,13 +16,9 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import {
-  Article,
-  School,
-  People,
-  Payment,
-} from '@mui/icons-material';
+import { Article, School, People, Payment } from '@mui/icons-material';
 
+// داده‌های آماری برای نمایش در کارت‌ها
 const statsData = [
   {
     title: 'مقالات',
@@ -51,6 +46,7 @@ const statsData = [
   },
 ];
 
+// داده‌های نمودار
 const chartData = [
   { name: 'فروردین', visits: 4000, revenue: 2400 },
   { name: 'اردیبهشت', visits: 3000, revenue: 1398 },
@@ -61,7 +57,7 @@ const chartData = [
 ];
 
 const Dashboard = () => {
-  const theme = useTheme();
+  const theme = useTheme(); // تم استفاده‌شده در پروژه
 
   return (
     <Box>
@@ -70,7 +66,7 @@ const Dashboard = () => {
       </Typography>
 
       <Grid container spacing={3}>
-        {statsData.map((stat) => (
+        {statsData.map(stat => (
           <Grid item xs={12} sm={6} md={3} key={stat.title}>
             <Paper
               sx={{
@@ -100,10 +96,7 @@ const Dashboard = () => {
                   sx: { fontSize: 40, color: stat.color },
                 })}
               </Box>
-              <Typography
-                variant="h4"
-                sx={{ mt: 'auto', color: stat.color }}
-              >
+              <Typography variant="h4" sx={{ mt: 'auto', color: stat.color }}>
                 {stat.count}
               </Typography>
               <Typography color="text.secondary">{stat.title}</Typography>
@@ -138,22 +131,14 @@ const Dashboard = () => {
               <Typography variant="body2" gutterBottom>
                 فضای ذخیره‌سازی
               </Typography>
-              <LinearProgress
-                variant="determinate"
-                value={70}
-                sx={{ mb: 1 }}
-              />
+              <LinearProgress variant="determinate" value={70} sx={{ mb: 1 }} />
               <Typography variant="body2">70% استفاده شده</Typography>
             </Box>
             <Box sx={{ mt: 3 }}>
               <Typography variant="body2" gutterBottom>
                 پردازش سرور
               </Typography>
-              <LinearProgress
-                variant="determinate"
-                value={45}
-                sx={{ mb: 1 }}
-              />
+              <LinearProgress variant="determinate" value={45} sx={{ mb: 1 }} />
               <Typography variant="body2">45% استفاده شده</Typography>
             </Box>
           </Paper>

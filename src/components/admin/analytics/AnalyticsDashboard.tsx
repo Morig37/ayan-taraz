@@ -53,7 +53,7 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
     setTimeRange(range);
     const end = new Date();
     const start = new Date();
-    
+
     switch (range) {
       case '7d':
         start.setDate(start.getDate() - 7);
@@ -67,7 +67,7 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
       default:
         break;
     }
-    
+
     onTimeRangeChange({ start, end });
   };
 
@@ -104,7 +104,11 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
         <Typography variant="h5">داشبورد تحلیلی</Typography>
         <FormControl sx={{ minWidth: 120 }}>
           <InputLabel>بازه زمانی</InputLabel>
-          <Select value={timeRange} onChange={handleTimeRangeChange} label="بازه زمانی">
+          <Select
+            value={timeRange}
+            onChange={handleTimeRangeChange}
+            label="بازه زمانی"
+          >
             <MenuItem value="7d">۷ روز گذشته</MenuItem>
             <MenuItem value="30d">۳۰ روز گذشته</MenuItem>
             <MenuItem value="90d">۹۰ روز گذشته</MenuItem>
@@ -138,7 +142,7 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
             title="درآمد"
             value={new Intl.NumberFormat('fa-IR', {
               style: 'currency',
-              currency: 'IRR'
+              currency: 'IRR',
             }).format(data.revenue.total)}
             subtitle={`${data.revenue.thisMonth} ریال در این ماه`}
             color="#FF9800"
@@ -196,7 +200,10 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
                   label
                 >
                   {data.revenue.byService.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
                 <Tooltip />

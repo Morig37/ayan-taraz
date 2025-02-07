@@ -133,14 +133,15 @@ export const TestRunner: React.FC<TestRunnerProps> = ({
                     acc +
                     (suite.duration ? Math.round(suite.duration / 1000) : 0),
                   0
-                )}s
+                )}
+                s
               </Typography>
               <Typography color="textSecondary">زمان کل</Typography>
             </Paper>
           </Grid>
         </Grid>
 
-        {suites.map((suite) => (
+        {suites.map(suite => (
           <Paper key={suite.id} sx={{ mb: 2 }}>
             <Box
               sx={{
@@ -165,19 +166,21 @@ export const TestRunner: React.FC<TestRunnerProps> = ({
                     suite.failedTests > 0
                       ? 'error'
                       : suite.passedTests === suite.totalTests
-                      ? 'success'
-                      : 'warning'
+                        ? 'success'
+                        : 'warning'
                   }
                 />
                 <Typography variant="body2" color="text.secondary">
-                  {suite.duration ? `${(suite.duration / 1000).toFixed(2)}s` : ''}
+                  {suite.duration
+                    ? `${(suite.duration / 1000).toFixed(2)}s`
+                    : ''}
                 </Typography>
               </Box>
             </Box>
 
             <Collapse in={selectedSuite === suite.id}>
               <List dense>
-                {suite.testCases.map((test) => (
+                {suite.testCases.map(test => (
                   <React.Fragment key={test.id}>
                     <ListItem
                       button

@@ -16,13 +16,7 @@ import {
   LinearProgress,
   Alert,
 } from '@mui/material';
-import {
-  Add,
-  Delete,
-  Save,
-  Refresh,
-  Search,
-} from '@mui/icons-material';
+import { Add, Delete, Save, Refresh, Search } from '@mui/icons-material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { SEOData } from '../../../types/seo';
@@ -56,7 +50,7 @@ export const SEOSettings: React.FC<SEOSettingsProps> = ({
   const formik = useFormik({
     initialValues: data,
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
         await onSave(values);
       } catch (error) {
@@ -75,7 +69,7 @@ export const SEOSettings: React.FC<SEOSettingsProps> = ({
   const handleRemoveKeyword = (keywordToRemove: string) => {
     formik.setFieldValue(
       'keywords',
-      formik.values.keywords.filter((k) => k !== keywordToRemove)
+      formik.values.keywords.filter(k => k !== keywordToRemove)
     );
   };
 
@@ -137,7 +131,9 @@ export const SEOSettings: React.FC<SEOSettingsProps> = ({
               label="توضیحات متا"
               value={formik.values.description}
               onChange={formik.handleChange}
-              error={formik.touched.description && Boolean(formik.errors.description)}
+              error={
+                formik.touched.description && Boolean(formik.errors.description)
+              }
               helperText={
                 (formik.touched.description && formik.errors.description) ||
                 `${formik.values.description.length}/160 کاراکتر`
@@ -151,8 +147,8 @@ export const SEOSettings: React.FC<SEOSettingsProps> = ({
                 fullWidth
                 label="کلمات کلیدی"
                 value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleAddKeyword()}
+                onChange={e => setKeyword(e.target.value)}
+                onKeyPress={e => e.key === 'Enter' && handleAddKeyword()}
                 InputProps={{
                   endAdornment: (
                     <IconButton onClick={handleAddKeyword}>
@@ -163,7 +159,7 @@ export const SEOSettings: React.FC<SEOSettingsProps> = ({
               />
             </Box>
             <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-              {formik.values.keywords.map((k) => (
+              {formik.values.keywords.map(k => (
                 <Chip
                   key={k}
                   label={k}
@@ -182,9 +178,13 @@ export const SEOSettings: React.FC<SEOSettingsProps> = ({
                 onChange={formik.handleChange}
               >
                 <MenuItem value="index,follow">ایندکس و دنبال کردن</MenuItem>
-                <MenuItem value="noindex,nofollow">عدم ایندکس و دنبال نکردن</MenuItem>
+                <MenuItem value="noindex,nofollow">
+                  عدم ایندکس و دنبال نکردن
+                </MenuItem>
                 <MenuItem value="index,nofollow">ایندکس و دنبال نکردن</MenuItem>
-                <MenuItem value="noindex,follow">عدم ایندکس و دنبال کردن</MenuItem>
+                <MenuItem value="noindex,follow">
+                  عدم ایندکس و دنبال کردن
+                </MenuItem>
               </Select>
             </FormControl>
           </Grid>

@@ -16,10 +16,7 @@ export const registerSchema = yup.object().shape({
     .string()
     .required('نام کاربری الزامی است')
     .min(3, 'نام کاربری باید حداقل 3 کاراکتر باشد'),
-  email: yup
-    .string()
-    .required('ایمیل الزامی است')
-    .email('ایمیل معتبر نیست'),
+  email: yup.string().required('ایمیل الزامی است').email('ایمیل معتبر نیست'),
   password: yup
     .string()
     .required('رمز عبور الزامی است')

@@ -42,20 +42,20 @@ const Home = () => {
   return (
     <Box>
       <ImageSlider images={sliderImages} />
-      
+
       <Container maxWidth="xl" sx={{ mt: 6 }}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Typography 
-              variant="h3" 
-              textAlign="center" 
+            <Typography
+              variant="h3"
+              textAlign="center"
               color="primary"
               sx={{ mb: 4 }}
             >
               خدمات موسسه حسابداری آیان تراز
             </Typography>
           </Grid>
-          
+
           <Grid item xs={12}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item>
@@ -68,10 +68,14 @@ const Home = () => {
                 <StyledButton href="/register">ثبت‌نام</StyledButton>
               </Grid>
               <Grid item>
-                <StyledButton href="/cooperation">نحوه همکاری با ما</StyledButton>
+                <StyledButton href="/cooperation">
+                  نحوه همکاری با ما
+                </StyledButton>
               </Grid>
               <Grid item>
-                <StyledButton href="/tax-calculator">محاسبه مالیات</StyledButton>
+                <StyledButton href="/tax-calculator">
+                  محاسبه مالیات
+                </StyledButton>
               </Grid>
               <Grid item>
                 <StyledButton href="/consultation">نوبت مشاوره</StyledButton>

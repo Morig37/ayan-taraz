@@ -40,8 +40,8 @@ export const SearchBox = () => {
           sx={{ ml: 1, flex: 1 }}
           placeholder="جستجو..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onFocus={(e) => setAnchorEl(e.currentTarget)}
+          onChange={e => setSearchTerm(e.target.value)}
+          onFocus={e => setAnchorEl(e.currentTarget)}
         />
         <IconButton type="submit" sx={{ p: '10px', color: 'primary.main' }}>
           <SearchIcon />

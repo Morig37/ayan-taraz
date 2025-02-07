@@ -44,9 +44,8 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(
-    null
-  );
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
   const [refundDialogOpen, setRefundDialogOpen] = useState(false);
   const [refundReason, setRefundReason] = useState('');
 
@@ -73,7 +72,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
   };
 
   const filteredTransactions = transactions.filter(
-    (transaction) =>
+    transaction =>
       transaction.trackingCode.includes(searchTerm) ||
       transaction.userName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -88,7 +87,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
           size="small"
           placeholder="جستجو بر اساس کد پیگیری یا نام کاربر..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={e => setSearchTerm(e.target.value)}
           InputProps={{
             startAdornment: <Search />,
           }}
@@ -110,7 +109,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredTransactions.map((transaction) => (
+            {filteredTransactions.map(transaction => (
               <TableRow key={transaction.id}>
                 <TableCell>{transaction.trackingCode}</TableCell>
                 <TableCell>{transaction.userName}</TableCell>
@@ -119,8 +118,8 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
                     {transaction.type === 'consultation'
                       ? 'مشاوره'
                       : transaction.type === 'subscription'
-                      ? 'اشتراک'
-                      : 'دوره'}
+                        ? 'اشتراک'
+                        : 'دوره'}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -142,7 +141,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
                 <TableCell>
                   <IconButton
                     size="small"
-                    onClick={(e) => handleMenuOpen(e, transaction)}
+                    onClick={e => handleMenuOpen(e, transaction)}
                   >
                     <MoreVert />
                   </IconButton>
@@ -194,7 +193,7 @@ export const TransactionsList: React.FC<TransactionsListProps> = ({
             rows={3}
             label="دلیل بازگشت وجه"
             value={refundReason}
-            onChange={(e) => setRefundReason(e.target.value)}
+            onChange={e => setRefundReason(e.target.value)}
             sx={{ mt: 2 }}
           />
         </DialogContent>

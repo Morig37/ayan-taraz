@@ -57,7 +57,7 @@ export const ContentList: React.FC<ContentListProps> = ({
     setSelectedItem(null);
   };
 
-  const filteredItems = items.filter((item) =>
+  const filteredItems = items.filter(item =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -82,7 +82,7 @@ export const ContentList: React.FC<ContentListProps> = ({
           size="small"
           placeholder="جستجو..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={e => setSearchTerm(e.target.value)}
           InputProps={{
             startAdornment: <Search />,
           }}
@@ -103,7 +103,7 @@ export const ContentList: React.FC<ContentListProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredItems.map((item) => (
+            {filteredItems.map(item => (
               <TableRow key={item.id}>
                 <TableCell>{item.title}</TableCell>
                 <TableCell>{item.author.name}</TableCell>
@@ -119,8 +119,8 @@ export const ContentList: React.FC<ContentListProps> = ({
                       item.status === 'published'
                         ? 'success'
                         : item.status === 'draft'
-                        ? 'default'
-                        : 'warning'
+                          ? 'default'
+                          : 'warning'
                     }
                     size="small"
                   />
@@ -129,7 +129,9 @@ export const ContentList: React.FC<ContentListProps> = ({
                   <Tooltip title="مشاهده">
                     <IconButton
                       size="small"
-                      onClick={() => window.open(`/${type}s/${item.slug}`, '_blank')}
+                      onClick={() =>
+                        window.open(`/${type}s/${item.slug}`, '_blank')
+                      }
                     >
                       <Visibility fontSize="small" />
                     </IconButton>
@@ -137,14 +139,16 @@ export const ContentList: React.FC<ContentListProps> = ({
                   <Tooltip title="ویرایش">
                     <IconButton
                       size="small"
-                      onClick={() => navigate(`/admin/${type}s/${item.id}/edit`)}
+                      onClick={() =>
+                        navigate(`/admin/${type}s/${item.id}/edit`)
+                      }
                     >
                       <Edit fontSize="small" />
                     </IconButton>
                   </Tooltip>
                   <IconButton
                     size="small"
-                    onClick={(e) => handleMenuOpen(e, item.id)}
+                    onClick={e => handleMenuOpen(e, item.id)}
                   >
                     <MoreVert fontSize="small" />
                   </IconButton>

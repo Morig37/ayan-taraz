@@ -19,39 +19,53 @@ export interface ChatResponse {
 
 export class ChatService {
   private static readonly API_URL = '/api/chat';
-  private static readonly TAX_KEYWORDS = ['مالیات', 'محاسبه', 'درآمد', 'مالیاتی'];
-  private static readonly CONSULTATION_KEYWORDS = ['مشاوره', 'وقت', 'رزرو', 'قرار'];
+  private static readonly TAX_KEYWORDS = [
+    'مالیات',
+    'محاسبه',
+    'درآمد',
+    'مالیاتی',
+  ];
+  private static readonly CONSULTATION_KEYWORDS = [
+    'مشاوره',
+    'وقت',
+    'رزرو',
+    'قرار',
+  ];
 
   static async sendMessage(message: string): Promise<ChatResponse> {
     try {
       // در نسخه واقعی، این بخش به API متصل می‌شود
       // فعلاً یک نمونه ساده پیاده‌سازی می‌کنیم
       const lowerMessage = message.toLowerCase();
-      
+
       // تشخیص نوع درخواست
       if (this.TAX_KEYWORDS.some(keyword => lowerMessage.includes(keyword))) {
         return {
           text: 'آیا مایل به محاسبه مالیات هستید؟',
           suggestions: ['بله، محاسبه کن', 'خیر، سوال دیگری دارم'],
           action: {
-            type: 'CALCULATE_TAX'
-          }
+            type: 'CALCULATE_TAX',
+          },
         };
       }
 
-      if (this.CONSULTATION_KEYWORDS.some(keyword => lowerMessage.includes(keyword))) {
+      if (
+        this.CONSULTATION_KEYWORDS.some(keyword =>
+          lowerMessage.includes(keyword)
+        )
+      ) {
         return {
           text: 'آیا می‌خواهید وقت مشاوره رزرو کنید؟',
           suggestions: ['بله، رزرو کن', 'اطلاعات بیشتر'],
           action: {
-            type: 'BOOK_CONSULTATION'
-          }
+            type: 'BOOK_CONSULTATION',
+          },
         };
       }
 
       return {
         text: 'چطور می‌توانم کمکتان کنم؟',
-        suggestions: ['محاسبه مالیات', 'رزرو مشاوره', 'سوالات متداول']
+        suggestions: ['محاسبه مالیات', 'رزرو مشاوره', 'سوالات متداول'],
       };
     } catch (error) {
       console.error('Chat service error:', error);

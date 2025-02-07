@@ -34,7 +34,9 @@ export class NotificationService {
     }
   }
 
-  static async sendNotification(notification: Partial<Notification>): Promise<void> {
+  static async sendNotification(
+    notification: Partial<Notification>
+  ): Promise<void> {
     try {
       await fetch(this.API_URL, {
         method: 'POST',

@@ -10,7 +10,7 @@ import {
   Chip,
   Box,
   TextField,
-  InputAdornment
+  InputAdornment,
 } from '@mui/material';
 import { Search } from '@mui/icons-material';
 
@@ -28,17 +28,18 @@ interface SecurityLogsProps {
   logs: SecurityLog[];
 }
 
-const levelColors: Record<SecurityLog['level'], 'info' | 'warning' | 'error'> = {
-  info: 'info',
-  warning: 'warning',
-  error: 'error'
-};
+const levelColors: Record<SecurityLog['level'], 'info' | 'warning' | 'error'> =
+  {
+    info: 'info',
+    warning: 'warning',
+    error: 'error',
+  };
 
 export const SecurityLogs: React.FC<SecurityLogsProps> = ({ logs }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredLogs = logs.filter((log) =>
-    Object.values(log).some((value) =>
+  const filteredLogs = logs.filter(log =>
+    Object.values(log).some(value =>
       value.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
@@ -50,7 +51,7 @@ export const SecurityLogs: React.FC<SecurityLogsProps> = ({ logs }) => {
         margin="normal"
         placeholder="جستجو در لاگ‌ها..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={e => setSearchTerm(e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -72,7 +73,7 @@ export const SecurityLogs: React.FC<SecurityLogsProps> = ({ logs }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredLogs.map((log) => (
+            {filteredLogs.map(log => (
               <TableRow key={log.id}>
                 <TableCell>
                   {new Date(log.timestamp).toLocaleString('fa-IR')}

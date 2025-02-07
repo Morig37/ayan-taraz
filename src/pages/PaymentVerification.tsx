@@ -7,7 +7,7 @@ import {
   Typography,
   Box,
   CircularProgress,
-  Button
+  Button,
 } from '@mui/material';
 import { ZarinpalService } from '../services/payment/zarinpal';
 import { CheckCircle, Error } from '@mui/icons-material';
@@ -35,7 +35,7 @@ const PaymentVerification = () => {
         const amount = Number(localStorage.getItem('payment_amount'));
         const result = await ZarinpalService.verifyPayment({
           authority,
-          amount
+          amount,
         });
 
         setRefId(result.refId);
@@ -58,7 +58,7 @@ const PaymentVerification = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            minHeight: '60vh'
+            minHeight: '60vh',
           }}
         >
           <CircularProgress />
@@ -72,9 +72,7 @@ const PaymentVerification = () => {
       <Paper sx={{ p: 4, mt: 4, textAlign: 'center' }}>
         {status === 'success' ? (
           <>
-            <CheckCircle
-              sx={{ fontSize: 60, color: 'success.main', mb: 2 }}
-            />
+            <CheckCircle sx={{ fontSize: 60, color: 'success.main', mb: 2 }} />
             <Typography variant="h5" gutterBottom>
               پرداخت با موفقیت انجام شد
             </Typography>
@@ -84,9 +82,7 @@ const PaymentVerification = () => {
           </>
         ) : (
           <>
-            <Error
-              sx={{ fontSize: 60, color: 'error.main', mb: 2 }}
-            />
+            <Error sx={{ fontSize: 60, color: 'error.main', mb: 2 }} />
             <Typography variant="h5" gutterBottom>
               پرداخت ناموفق
             </Typography>

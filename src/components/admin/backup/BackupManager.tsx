@@ -34,7 +34,12 @@ import {
   Schedule,
   Settings,
 } from '@mui/icons-material';
-import { BackupFile, BackupConfig, BackupType, BackupStatus } from '../../../types/backup';
+import {
+  BackupFile,
+  BackupConfig,
+  BackupType,
+  BackupStatus,
+} from '../../../types/backup';
 
 interface BackupManagerProps {
   backups: BackupFile[];
@@ -65,14 +70,16 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
   const [showConfig, setShowConfig] = useState(false);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [creatingBackup, setCreatingBackup] = useState(false);
-  const [newBackupConfig, setNewBackupConfig] = useState<Partial<BackupConfig>>({
-    type: 'full',
-    includeFiles: true,
-    includeDatabase: true,
-    includeSettings: true,
-    compression: true,
-    encrypt: true,
-  });
+  const [newBackupConfig, setNewBackupConfig] = useState<Partial<BackupConfig>>(
+    {
+      type: 'full',
+      includeFiles: true,
+      includeDatabase: true,
+      includeSettings: true,
+      compression: true,
+      encrypt: true,
+    }
+  );
 
   const handleCreateBackup = async () => {
     setCreatingBackup(true);
@@ -120,7 +127,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {backups.map((backup) => (
+              {backups.map(backup => (
                 <TableRow key={backup.id}>
                   <TableCell>{backup.filename}</TableCell>
                   <TableCell>
@@ -129,8 +136,8 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
                         backup.type === 'full'
                           ? 'کامل'
                           : backup.type === 'partial'
-                          ? 'جزئی'
-                          : 'تنظیمات'
+                            ? 'جزئی'
+                            : 'تنظیمات'
                       }
                       size="small"
                     />
@@ -196,7 +203,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
               <Select
                 value={newBackupConfig.type}
                 label="نوع پشتیبان"
-                onChange={(e) =>
+                onChange={e =>
                   setNewBackupConfig({
                     ...newBackupConfig,
                     type: e.target.value as BackupType,
@@ -213,7 +220,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
               control={
                 <Checkbox
                   checked={newBackupConfig.includeFiles}
-                  onChange={(e) =>
+                  onChange={e =>
                     setNewBackupConfig({
                       ...newBackupConfig,
                       includeFiles: e.target.checked,
@@ -228,7 +235,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
               control={
                 <Checkbox
                   checked={newBackupConfig.includeDatabase}
-                  onChange={(e) =>
+                  onChange={e =>
                     setNewBackupConfig({
                       ...newBackupConfig,
                       includeDatabase: e.target.checked,
@@ -243,7 +250,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
               control={
                 <Checkbox
                   checked={newBackupConfig.includeSettings}
-                  onChange={(e) =>
+                  onChange={e =>
                     setNewBackupConfig({
                       ...newBackupConfig,
                       includeSettings: e.target.checked,
@@ -258,7 +265,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
               control={
                 <Checkbox
                   checked={newBackupConfig.compression}
-                  onChange={(e) =>
+                  onChange={e =>
                     setNewBackupConfig({
                       ...newBackupConfig,
                       compression: e.target.checked,
@@ -273,7 +280,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
               control={
                 <Checkbox
                   checked={newBackupConfig.encrypt}
-                  onChange={(e) =>
+                  onChange={e =>
                     setNewBackupConfig({
                       ...newBackupConfig,
                       encrypt: e.target.checked,
@@ -291,7 +298,9 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
             variant="contained"
             onClick={handleCreateBackup}
             disabled={creatingBackup}
-            startIcon={creatingBackup ? <CircularProgress size={20} /> : <Backup />}
+            startIcon={
+              creatingBackup ? <CircularProgress size={20} /> : <Backup />
+            }
           >
             شروع پشتیبان‌گیری
           </Button>
@@ -316,12 +325,15 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
               <Select
                 value={config.schedule?.frequency || 'daily'}
                 label="تناوب"
-                onChange={(e) =>
+                onChange={e =>
                   onUpdateConfig({
                     ...config,
                     schedule: {
                       ...config.schedule,
-                      frequency: e.target.value as 'daily' | 'weekly' | 'monthly',
+                      frequency: e.target.value as
+                        | 'daily'
+                        | 'weekly'
+                        | 'monthly',
                     },
                   })
                 }
@@ -340,7 +352,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
                 type="number"
                 label="تعداد نسخه‌ها"
                 value={config.retention.count}
-                onChange={(e) =>
+                onChange={e =>
                   onUpdateConfig({
                     ...config,
                     retention: {
@@ -354,7 +366,7 @@ export const BackupManager: React.FC<BackupManagerProps> = ({
                 type="number"
                 label="مدت نگهداری (روز)"
                 value={config.retention.days}
-                onChange={(e) =>
+                onChange={e =>
                   onUpdateConfig({
                     ...config,
                     retention: {

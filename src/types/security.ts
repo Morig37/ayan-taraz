@@ -1,9 +1,9 @@
 // src/types/security.ts
 export type LogLevel = 'info' | 'warning' | 'error' | 'critical';
-export type ActivityType = 
-  | 'login' 
-  | 'logout' 
-  | 'failed_login' 
+export type ActivityType =
+  | 'login'
+  | 'logout'
+  | 'failed_login'
   | 'password_change'
   | 'profile_update'
   | 'data_access'

@@ -43,13 +43,8 @@ export const SelectField: React.FC<SelectFieldProps> = ({
 }) => (
   <FormControl fullWidth error={!!error}>
     <InputLabel>{label}</InputLabel>
-    <Select
-      name={name}
-      value={value}
-      onChange={onChange}
-      label={label}
-    >
-      {options.map((option) => (
+    <Select name={name} value={value} onChange={onChange} label={label}>
+      {options.map(option => (
         <MenuItem key={option.value} value={option.value}>
           {option.label}
         </MenuItem>

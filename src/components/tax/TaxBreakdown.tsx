@@ -1,4 +1,11 @@
-import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 
 export const TaxBreakdown = () => {
   return (
@@ -11,9 +18,7 @@ export const TaxBreakdown = () => {
             <TableCell>Tax Amount</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {/* Dynamic tax breakdown rows */}
-        </TableBody>
+        <TableBody>{/* Dynamic tax breakdown rows */}</TableBody>
       </Table>
     </Paper>
   );

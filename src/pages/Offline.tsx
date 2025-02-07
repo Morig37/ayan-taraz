@@ -1,12 +1,6 @@
 // src/pages/Offline.tsx
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Button,
-  Container,
-  Paper,
-} from '@mui/material';
+import { Box, Typography, Button, Container, Paper } from '@mui/material';
 import { WifiOff, Refresh } from '@mui/icons-material';
 
 export const Offline: React.FC = () => {

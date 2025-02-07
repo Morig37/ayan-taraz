@@ -22,9 +22,14 @@ interface PaymentSettingsProps {
 
 const validationSchema = Yup.object({
   merchantId: Yup.string().required('شناسه درگاه الزامی است'),
-  callbackUrl: Yup.string().url('آدرس بازگشت نامعتبر است').required('آدرس بازگشت الزامی است'),
+  callbackUrl: Yup.string()
+    .url('آدرس بازگشت نامعتبر است')
+    .required('آدرس بازگشت الزامی است'),
   minAmount: Yup.number().min(1000, 'حداقل مبلغ ۱,۰۰۰ ریال است'),
-  maxAmount: Yup.number().min(Yup.ref('minAmount'), 'حداکثر مبلغ باید بیشتر از حداقل مبلغ باشد'),
+  maxAmount: Yup.number().min(
+    Yup.ref('minAmount'),
+    'حداکثر مبلغ باید بیشتر از حداقل مبلغ باشد'
+  ),
 });
 
 export const PaymentSettings: React.FC<PaymentSettingsProps> = ({
@@ -34,7 +39,7 @@ export const PaymentSettings: React.FC<PaymentSettingsProps> = ({
   const formik = useFormik({
     initialValues: settings,
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
         await onSave(values);
       } catch (error) {
@@ -58,7 +63,9 @@ export const PaymentSettings: React.FC<PaymentSettingsProps> = ({
               label="شناسه درگاه"
               value={formik.values.merchantId}
               onChange={formik.handleChange}
-              error={formik.touched.merchantId && Boolean(formik.errors.merchantId)}
+              error={
+                formik.touched.merchantId && Boolean(formik.errors.merchantId)
+              }
               helperText={formik.touched.merchantId && formik.errors.merchantId}
             />
           </Grid>
@@ -70,8 +77,12 @@ export const PaymentSettings: React.FC<PaymentSettingsProps> = ({
               label="آدرس بازگشت"
               value={formik.values.callbackUrl}
               onChange={formik.handleChange}
-              error={formik.touched.callbackUrl && Boolean(formik.errors.callbackUrl)}
-              helperText={formik.touched.callbackUrl && formik.errors.callbackUrl}
+              error={
+                formik.touched.callbackUrl && Boolean(formik.errors.callbackUrl)
+              }
+              helperText={
+                formik.touched.callbackUrl && formik.errors.callbackUrl
+              }
             />
           </Grid>
 
@@ -83,7 +94,9 @@ export const PaymentSettings: React.FC<PaymentSettingsProps> = ({
               type="number"
               value={formik.values.minAmount}
               onChange={formik.handleChange}
-              error={formik.touched.minAmount && Boolean(formik.errors.minAmount)}
+              error={
+                formik.touched.minAmount && Boolean(formik.errors.minAmount)
+              }
               helperText={formik.touched.minAmount && formik.errors.minAmount}
             />
           </Grid>
@@ -96,7 +109,9 @@ export const PaymentSettings: React.FC<PaymentSettingsProps> = ({
               type="number"
               value={formik.values.maxAmount}
               onChange={formik.handleChange}
-              error={formik.touched.maxAmount && Boolean(formik.errors.maxAmount)}
+              error={
+                formik.touched.maxAmount && Boolean(formik.errors.maxAmount)
+              }
               helperText={formik.touched.maxAmount && formik.errors.maxAmount}
             />
           </Grid>

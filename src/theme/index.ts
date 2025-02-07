@@ -20,23 +20,26 @@ declare module '@mui/material/styles' {
   }
 }
 
-export const theme = createTheme({
-  direction: 'rtl',
-  typography: {
-    fontFamily: 'IRANSans, Arial, sans-serif',
-  },
-  palette: {
-    primary: {
-      main: '#1976d2',
+export const theme = createTheme(
+  {
+    direction: 'rtl',
+    typography: {
+      fontFamily: 'IRANSans, Arial, sans-serif',
     },
-    secondary: {
-      main: '#dc004e',
+    palette: {
+      primary: {
+        main: '#1976d2',
+      },
+      secondary: {
+        main: '#dc004e',
+      },
+    },
+    custom: {
+      sidebar: {
+        width: 240,
+        closedWidth: 70,
+      },
     },
   },
-  custom: {
-    sidebar: {
-      width: 240,
-      closedWidth: 70,
-    },
-  },
-}, faIR);
+  faIR
+);

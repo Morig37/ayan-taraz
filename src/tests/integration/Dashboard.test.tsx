@@ -11,8 +11,8 @@ describe('AdminDashboard Integration', () => {
     newOrders: 25,
     stats: {
       lastWeek: [],
-      lastMonth: []
-    }
+      lastMonth: [],
+    },
   };
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('AdminDashboard Integration', () => {
 
   it('should load and display dashboard data', async () => {
     const mockOnRefresh = jest.fn();
-    
+
     (DashboardService.getStats as jest.Mock).mockResolvedValueOnce(mockStats);
 
     render(<AdminDashboard stats={mockStats} onRefresh={mockOnRefresh} />);

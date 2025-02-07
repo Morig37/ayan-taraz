@@ -1,4 +1,3 @@
-// src/pages/FormExample.tsx
 import React from 'react';
 import { DynamicForm } from '../components/form/DynamicForm';
 import { FormConfig } from '../types/form';
@@ -22,9 +21,7 @@ const formConfig: FormConfig = {
       name: 'lastName',
       label: 'نام خانوادگی',
       type: 'text',
-      validation: [
-        { type: 'required', message: 'نام خانوادگی الزامی است' },
-      ],
+      validation: [{ type: 'required', message: 'نام خانوادگی الزامی است' }],
     },
     {
       name: 'email',
@@ -41,7 +38,11 @@ const formConfig: FormConfig = {
       type: 'password',
       validation: [
         { type: 'required', message: 'رمز عبور الزامی است' },
-        { type: 'minLength', params: 8, message: 'رمز عبور باید حداقل ۸ کاراکتر باشد' },
+        {
+          type: 'minLength',
+          params: 8,
+          message: 'رمز عبور باید حداقل ۸ کاراکتر باشد',
+        },
       ],
     },
     {
@@ -63,8 +64,17 @@ const formConfig: FormConfig = {
   ],
 };
 
+type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: string;
+  bio?: string;
+};
+
 export const FormExample: React.FC = () => {
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: FormData) => {
     try {
       // ارسال داده‌ها به سرور
       console.log('Form data:', data);
@@ -74,7 +84,7 @@ export const FormExample: React.FC = () => {
   };
 
   return (
-    <DynamicForm 
+    <DynamicForm
       config={formConfig}
       onSubmit={handleSubmit}
       initialValues={{

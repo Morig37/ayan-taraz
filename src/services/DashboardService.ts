@@ -7,7 +7,7 @@ export class DashboardService {
   static async getStats(): Promise<DashboardStats> {
     try {
       const response = await fetch(this.API_URL);
-      
+
       if (!response.ok) {
         throw new Error('خطا در دریافت آمار داشبورد');
       }

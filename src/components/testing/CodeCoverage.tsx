@@ -102,7 +102,7 @@ export const CodeCoverage: React.FC<CodeCoverageProps> = ({ data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.files.map((file) => (
+            {data.files.map(file => (
               <TableRow key={file.path}>
                 <TableCell component="th" scope="row">
                   {file.path}

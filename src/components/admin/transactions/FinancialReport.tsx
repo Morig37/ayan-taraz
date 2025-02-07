@@ -79,7 +79,7 @@ export const FinancialReport: React.FC<FinancialReportProps> = ({
   return (
     <Box>
       <Grid container spacing={3}>
-        {statsCards.map((card) => (
+        {statsCards.map(card => (
           <Grid item xs={12} sm={6} md={3} key={card.title}>
             <Card>
               <CardContent>

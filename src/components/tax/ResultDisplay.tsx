@@ -7,12 +7,8 @@ export const ResultDisplay = () => {
         نتیجه محاسبات
       </Typography>
       <Divider sx={{ my: 2 }} />
-      <Typography>
-        درآمد مشمول مالیات: ۱۰۰,۰۰۰,۰۰۰ ریال
-      </Typography>
-      <Typography>
-        مالیات قابل پرداخت: ۲۰,۰۰۰,۰۰۰ ریال
-      </Typography>
+      <Typography>درآمد مشمول مالیات: ۱۰۰,۰۰۰,۰۰۰ ریال</Typography>
+      <Typography>مالیات قابل پرداخت: ۲۰,۰۰۰,۰۰۰ ریال</Typography>
     </Paper>
   );
 };

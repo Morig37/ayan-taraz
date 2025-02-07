@@ -8,9 +8,9 @@ export class AuthService {
       const response = await fetch(`${this.baseUrl}/auth/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(credentials)
+        body: JSON.stringify(credentials),
       });
 
       if (!response.ok) {
@@ -19,21 +19,29 @@ export class AuthService {
 
       return await response.json();
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : 'An error occurred during login');
+      throw new Error(
+        error instanceof Error
+          ? error.message
+          : 'An error occurred during login'
+      );
     }
   }
 
   static async logout(): Promise<void> {
     try {
       const response = await fetch(`${this.baseUrl}/auth/logout`, {
-        method: 'POST'
+        method: 'POST',
       });
 
       if (!response.ok) {
         throw new Error('Logout failed');
       }
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : 'An error occurred during logout');
+      throw new Error(
+        error instanceof Error
+          ? error.message
+          : 'An error occurred during logout'
+      );
     }
   }
 }

@@ -115,7 +115,7 @@ export const APIDocumentation: React.FC<Props> = ({ groups, onTest }) => {
         </Tabs>
       </Paper>
 
-      {groups[activeTab].endpoints.map((endpoint) => (
+      {groups[activeTab].endpoints.map(endpoint => (
         <Accordion
           key={endpoint.path}
           expanded={expandedEndpoint === endpoint.path}
@@ -134,10 +134,10 @@ export const APIDocumentation: React.FC<Props> = ({ groups, onTest }) => {
                   endpoint.method === 'GET'
                     ? 'success'
                     : endpoint.method === 'POST'
-                    ? 'primary'
-                    : endpoint.method === 'PUT'
-                    ? 'warning'
-                    : 'error'
+                      ? 'primary'
+                      : endpoint.method === 'PUT'
+                        ? 'warning'
+                        : 'error'
                 }
                 size="small"
               />
@@ -166,7 +166,7 @@ export const APIDocumentation: React.FC<Props> = ({ groups, onTest }) => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {endpoint.parameters.map((param) => (
+                      {endpoint.parameters.map(param => (
                         <TableRow key={param.name}>
                           <TableCell>{param.name}</TableCell>
                           <TableCell>{param.type}</TableCell>
@@ -208,13 +208,13 @@ export const APIDocumentation: React.FC<Props> = ({ groups, onTest }) => {
                   تست API
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
-                  {endpoint.parameters?.map((param) => (
+                  {endpoint.parameters?.map(param => (
                     <TextField
                       key={param.name}
                       label={param.name}
                       size="small"
                       value={testParams[param.name] || ''}
-                      onChange={(e) =>
+                      onChange={e =>
                         setTestParams({
                           ...testParams,
                           [param.name]: e.target.value,

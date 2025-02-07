@@ -17,7 +17,8 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export const InstallPWA: React.FC = () => {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallDialog, setShowInstallDialog] = useState(false);
 
   useEffect(() => {
@@ -50,14 +51,15 @@ export const InstallPWA: React.FC = () => {
   }
 
   return (
-    <Dialog open={showInstallDialog} onClose={() => setShowInstallDialog(false)}>
+    <Dialog
+      open={showInstallDialog}
+      onClose={() => setShowInstallDialog(false)}
+    >
       <DialogTitle>نصب اپلیکیشن</DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
           <img src="/icons/icon-192x192.png" alt="آیان تراز" width={64} />
-          <Typography>
-            با نصب اپلیکیشن آیان تراز، می‌توانید:
-          </Typography>
+          <Typography>با نصب اپلیکیشن آیان تراز، می‌توانید:</Typography>
         </Box>
         <ul>
           <li>به سرعت به سامانه دسترسی داشته باشید</li>

@@ -48,7 +48,7 @@ const ConsultationPage = () => {
       description: '',
     },
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
         // ارسال اطلاعات به سرور
         console.log('Consultation form submitted:', values);
@@ -60,11 +60,11 @@ const ConsultationPage = () => {
   });
 
   const handleNext = () => {
-    setActiveStep((prevStep) => prevStep + 1);
+    setActiveStep(prevStep => prevStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep((prevStep) => prevStep - 1);
+    setActiveStep(prevStep => prevStep - 1);
   };
 
   return (
@@ -76,7 +76,7 @@ const ConsultationPage = () => {
           </Typography>
 
           <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
-            {steps.map((label) => (
+            {steps.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
@@ -154,7 +154,9 @@ const ConsultationPage = () => {
                       label="شماره موبایل"
                       value={formik.values.phone}
                       onChange={formik.handleChange}
-                      error={formik.touched.phone && Boolean(formik.errors.phone)}
+                      error={
+                        formik.touched.phone && Boolean(formik.errors.phone)
+                      }
                       helperText={formik.touched.phone && formik.errors.phone}
                     />
                   </Grid>
@@ -173,11 +175,14 @@ const ConsultationPage = () => {
               )}
 
               <Grid item xs={12}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                  >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    mt: 2,
+                  }}
+                >
+                  <Button disabled={activeStep === 0} onClick={handleBack}>
                     مرحله قبل
                   </Button>
                   {activeStep === steps.length - 1 ? (
@@ -189,10 +194,7 @@ const ConsultationPage = () => {
                       ثبت درخواست
                     </Button>
                   ) : (
-                    <Button
-                      variant="contained"
-                      onClick={handleNext}
-                    >
+                    <Button variant="contained" onClick={handleNext}>
                       مرحله بعد
                     </Button>
                   )}

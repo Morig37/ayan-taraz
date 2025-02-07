@@ -62,7 +62,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ content, type }) => {
           >
             {content.title}
           </Typography>
-          
+
           <Typography
             color="text.secondary"
             sx={{
@@ -78,7 +78,7 @@ export const ContentCard: React.FC<ContentCardProps> = ({ content, type }) => {
           </Typography>
 
           <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 2 }}>
-            {content.tags.slice(0, 3).map((tag) => (
+            {content.tags.slice(0, 3).map(tag => (
               <Chip
                 key={tag}
                 label={tag}

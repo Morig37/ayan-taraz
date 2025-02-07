@@ -15,7 +15,7 @@ export class DevErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
     error: null,
-    errorInfo: null
+    errorInfo: null,
   };
 
   public static getDerivedStateFromError(error: Error): State {
@@ -25,9 +25,9 @@ export class DevErrorBoundary extends Component<Props, State> {
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
-    
+
     // در محیط توسعه می‌توانیم خطاها را لاگ کنیم
     if (process.env.REACT_APP_ENV === 'development') {
       console.error('Error:', error);
@@ -43,17 +43,15 @@ export class DevErrorBoundary extends Component<Props, State> {
             خطای توسعه
           </Typography>
           <Box sx={{ mt: 2 }}>
-            <Typography variant="body1">
-              {this.state.error?.message}
-            </Typography>
+            <Typography variant="body1">{this.state.error?.message}</Typography>
             {this.state.errorInfo && (
               <pre style={{ overflow: 'auto', maxHeight: '300px' }}>
                 {this.state.errorInfo.componentStack}
               </pre>
             )}
           </Box>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             color="primary"
             onClick={() => window.location.reload()}
             sx={{ mt: 2 }}

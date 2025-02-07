@@ -21,7 +21,9 @@ interface DetailedReportsProps {
 }
 
 export const DetailedReports: React.FC<DetailedReportsProps> = ({ data }) => {
-  const [reportType, setReportType] = useState<'users' | 'revenue' | 'consultations'>('users');
+  const [reportType, setReportType] = useState<
+    'users' | 'revenue' | 'consultations'
+  >('users');
 
   const generateReport = () => {
     // پیاده‌سازی خروجی گزارش به صورت CSV یا EXCEL
@@ -95,9 +97,7 @@ export const DetailedReports: React.FC<DetailedReportsProps> = ({ data }) => {
               )}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {/* نمایش داده‌های متناسب با نوع گزارش */}
-          </TableBody>
+          <TableBody>{/* نمایش داده‌های متناسب با نوع گزارش */}</TableBody>
         </Table>
       </TableContainer>
     </Paper>

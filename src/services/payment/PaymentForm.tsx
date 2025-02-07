@@ -6,7 +6,7 @@ import {
   Typography,
   Paper,
   CircularProgress,
-  Alert
+  Alert,
 } from '@mui/material';
 import { ZarinpalService } from '../../services/payment/zarinpal';
 
@@ -26,7 +26,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
   description,
   onSuccess,
   onError,
-  userInfo
+  userInfo,
 }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -42,7 +42,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
         description,
         callbackUrl,
         mobile: userInfo?.mobile,
-        email: userInfo?.email
+        email: userInfo?.email,
       });
 
       // ریدایرکت به درگاه پرداخت

@@ -3,7 +3,11 @@
 
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate, CacheFirst, NetworkFirst } from 'workbox-strategies';
+import {
+  StaleWhileRevalidate,
+  CacheFirst,
+  NetworkFirst,
+} from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 
@@ -58,10 +62,10 @@ registerRoute(
 );
 
 // مدیریت آفلاین
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   if (!navigator.onLine) {
     event.respondWith(
-      caches.match(event.request).then((response) => {
+      caches.match(event.request).then(response => {
         if (response) {
           return response;
         }
@@ -72,7 +76,7 @@ self.addEventListener('fetch', (event) => {
 });
 
 // به‌روزرسانی سرویس ورکر
-self.addEventListener('message', (event) => {
+self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }

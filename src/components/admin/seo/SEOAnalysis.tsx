@@ -11,12 +11,7 @@ import {
   Chip,
   CircularProgress,
 } from '@mui/material';
-import {
-  CheckCircle,
-  Error,
-  Warning,
-  Info,
-} from '@mui/icons-material';
+import { CheckCircle, Error, Warning, Info } from '@mui/icons-material';
 import { SEOAnalysis as SEOAnalysisType } from '../../../types/seo';
 
 interface SEOAnalysisProps {
@@ -48,8 +43,8 @@ export const SEOAnalysis: React.FC<SEOAnalysisProps> = ({ analysis }) => {
               analysis.score >= 80
                 ? 'success'
                 : analysis.score >= 50
-                ? 'warning'
-                : 'error'
+                  ? 'warning'
+                  : 'error'
             }
           />
           <Box
@@ -64,14 +59,16 @@ export const SEOAnalysis: React.FC<SEOAnalysisProps> = ({ analysis }) => {
               justifyContent: 'center',
             }}
           >
-            <Typography variant="caption" component="div" color="text.secondary">
+            <Typography
+              variant="caption"
+              component="div"
+              color="text.secondary"
+            >
               {analysis.score}%
             </Typography>
           </Box>
         </Box>
-        <Typography variant="h6">
-          نتیجه تحلیل SEO
-        </Typography>
+        <Typography variant="h6">نتیجه تحلیل SEO</Typography>
       </Box>
 
       <List>
@@ -98,8 +95,8 @@ export const SEOAnalysis: React.FC<SEOAnalysisProps> = ({ analysis }) => {
                       issue.priority === 'high'
                         ? 'بالا'
                         : issue.priority === 'medium'
-                        ? 'متوسط'
-                        : 'پایین'
+                          ? 'متوسط'
+                          : 'پایین'
                     }`}
                     size="small"
                     sx={{

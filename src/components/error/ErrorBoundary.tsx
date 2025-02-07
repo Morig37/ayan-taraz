@@ -1,12 +1,6 @@
 // src/components/error/ErrorBoundary.tsx
 import React, { Component, ErrorInfo } from 'react';
-import {
-  Box,
-  Paper,
-  Typography,
-  Button,
-  Collapse,
-} from '@mui/material';
+import { Box, Paper, Typography, Button, Collapse } from '@mui/material';
 import { ErrorOutline, Refresh, BugReport } from '@mui/icons-material';
 import { ErrorLog } from '../../types/error';
 import { ErrorService } from '../../services/ErrorService';
@@ -58,7 +52,7 @@ export class ErrorBoundary extends Component<Props, State> {
     };
 
     ErrorService.logError(errorLog);
-    
+
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
     }
@@ -69,7 +63,7 @@ export class ErrorBoundary extends Component<Props, State> {
   };
 
   handleShowDetails = () => {
-    this.setState((prev) => ({
+    this.setState(prev => ({
       showDetails: !prev.showDetails,
     }));
   };
@@ -97,19 +91,18 @@ export class ErrorBoundary extends Component<Props, State> {
               textAlign: 'center',
             }}
           >
-            <ErrorOutline
-              color="error"
-              sx={{ fontSize: 64, mb: 2 }}
-            />
+            <ErrorOutline color="error" sx={{ fontSize: 64, mb: 2 }} />
             <Typography variant="h5" gutterBottom>
               متأسفیم! خطایی رخ داده است
             </Typography>
             <Typography color="text.secondary" paragraph>
-              لطفاً صفحه را مجدداً بارگذاری کنید. اگر مشکل همچنان ادامه داشت،
-              با پشتیبانی تماس بگیرید.
+              لطفاً صفحه را مجدداً بارگذاری کنید. اگر مشکل همچنان ادامه داشت، با
+              پشتیبانی تماس بگیرید.
             </Typography>
-            
-            <Box sx={{ mt: 3, display: 'flex', gap: 2, justifyContent: 'center' }}>
+
+            <Box
+              sx={{ mt: 3, display: 'flex', gap: 2, justifyContent: 'center' }}
+            >
               <Button
                 variant="contained"
                 startIcon={<Refresh />}

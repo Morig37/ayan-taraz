@@ -46,7 +46,7 @@ export class ErrorService {
     if (storedErrors.length === 0) return;
 
     const successfulSyncs: number[] = [];
-    
+
     for (let i = 0; i < storedErrors.length; i++) {
       try {
         await this.logError(storedErrors[i]);
@@ -79,7 +79,7 @@ export class ErrorService {
       });
     };
 
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener('unhandledrejection', event => {
       this.logError({
         severity: 'error',
         source: 'client',

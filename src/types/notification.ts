@@ -1,11 +1,11 @@
 // src/types/notification.ts
-export type NotificationType = 
-  | 'success' 
-  | 'warning' 
-  | 'error' 
-  | 'info' 
-  | 'payment' 
-  | 'consultation' 
+export type NotificationType =
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info'
+  | 'payment'
+  | 'consultation'
   | 'message';
 
 export interface Notification {

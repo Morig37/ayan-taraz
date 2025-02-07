@@ -7,7 +7,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  FormHelperText
+  FormHelperText,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -19,7 +19,7 @@ import { useTheme } from '../../../hooks/useTheme';
 // Dynamic import for ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
-  loading: () => <p>Loading editor...</p>
+  loading: () => <p>Loading editor...</p>,
 });
 
 interface ContentFormProps {
@@ -35,11 +35,10 @@ const validationSchema = Yup.object({
   content: Yup.string()
     .required('محتوا الزامی است')
     .min(10, 'محتوا باید حداقل 10 کاراکتر باشد'),
-  categoryId: Yup.string()
-    .required('دسته‌بندی الزامی است'),
+  categoryId: Yup.string().required('دسته‌بندی الزامی است'),
   status: Yup.string()
     .oneOf(['draft', 'published', 'archived'], 'وضعیت نامعتبر است')
-    .required('وضعیت الزامی است')
+    .required('وضعیت الزامی است'),
 });
 
 export const ContentForm: React.FC<ContentFormProps> = ({
@@ -47,34 +46,34 @@ export const ContentForm: React.FC<ContentFormProps> = ({
     title: '',
     content: '',
     categoryId: '',
-    status: 'draft'
+    status: 'draft',
   },
   onSubmit,
-  categories
+  categories,
 }) => {
   const theme = useTheme();
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
         await onSubmit(values);
       } catch (error) {
         console.error('Form submission error:', error);
       }
-    }
+    },
   });
 
   const quillModules = {
     toolbar: [
-      [{ 'header': [1, 2, 3, false] }],
+      [{ header: [1, 2, 3, false] }],
       ['bold', 'italic', 'underline', 'strike'],
-      [{ 'direction': 'rtl' }],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ direction: 'rtl' }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
       ['link', 'image'],
-      ['clean']
-    ]
+      ['clean'],
+    ],
   };
 
   return (
@@ -100,7 +99,7 @@ export const ContentForm: React.FC<ContentFormProps> = ({
           onChange={formik.handleChange}
           error={formik.touched.categoryId && Boolean(formik.errors.categoryId)}
         >
-          {categories.map((category) => (
+          {categories.map(category => (
             <MenuItem key={category.id} value={category.id}>
               {category.title}
             </MenuItem>
@@ -120,7 +119,7 @@ export const ContentForm: React.FC<ContentFormProps> = ({
             height: '300px',
             marginBottom: '50px',
             direction: 'rtl',
-            background: theme.palette.background.paper
+            background: theme.palette.background.paper,
           }}
         />
         {formik.touched.content && formik.errors.content && (

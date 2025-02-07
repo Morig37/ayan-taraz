@@ -10,20 +10,23 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const login = useCallback(async (credentials: LoginCredentials) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await AuthService.login(credentials);
-      setUser(response.user);
-      navigate('/dashboard');
-    } catch (err) {
-      setError('نام کاربری یا رمز عبور اشتباه است');
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, [navigate]);
+  const login = useCallback(
+    async (credentials: LoginCredentials) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await AuthService.login(credentials);
+        setUser(response.user);
+        navigate('/dashboard');
+      } catch (err) {
+        setError('نام کاربری یا رمز عبور اشتباه است');
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [navigate]
+  );
 
   const logout = useCallback(async () => {
     try {

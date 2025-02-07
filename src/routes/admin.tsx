@@ -11,33 +11,33 @@ export const adminRoutes = {
   path: '/admin',
   element: <AdminLayout />,
   children: [
-    { 
-      path: '', 
-      element: <Dashboard /> 
+    {
+      path: '',
+      element: <Dashboard />,
     },
-    { 
-      path: 'articles', 
-      element: <Articles /> 
+    {
+      path: 'articles',
+      element: <Articles />,
     },
-    { 
-      path: 'articles/new', 
-      element: <ArticleForm /> 
+    {
+      path: 'articles/new',
+      element: <ArticleForm />,
     },
-    { 
-      path: 'articles/:id/edit', 
-      element: <ArticleForm /> 
+    {
+      path: 'articles/:id/edit',
+      element: <ArticleForm />,
     },
-    { 
-      path: 'users', 
-      element: <Users /> 
+    {
+      path: 'users',
+      element: <Users />,
     },
-    { 
-      path: 'settings', 
-      element: <Settings /> 
+    {
+      path: 'settings',
+      element: <Settings />,
     },
-    { 
-      path: '*', 
-      element: <Navigate to="/admin" replace /> 
-    }
-  ]
+    {
+      path: '*',
+      element: <Navigate to="/admin" replace />,
+    },
+  ],
 };

@@ -1,6 +1,10 @@
 // src/types/transaction.ts
 export type TransactionType = 'consultation' | 'subscription' | 'course';
-export type TransactionStatus = 'pending' | 'successful' | 'failed' | 'refunded';
+export type TransactionStatus =
+  | 'pending'
+  | 'successful'
+  | 'failed'
+  | 'refunded';
 
 export interface Transaction {
   id: string;

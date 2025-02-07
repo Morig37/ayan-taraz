@@ -10,7 +10,7 @@ import {
   Avatar,
   Button,
   Tooltip,
-  MenuItem
+  MenuItem,
 } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
           >
             <MenuIcon />
           </IconButton>
-          
+
           <Typography
             variant="h6"
             noWrap

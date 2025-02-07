@@ -1,4 +1,3 @@
-// src/pages/Articles.tsx
 import React, { useState } from 'react';
 import {
   Container,
@@ -31,7 +30,7 @@ const Articles = () => {
     // نمونه داده
   ]);
 
-  const filteredArticles = articles.filter((article) => {
+  const filteredArticles = articles.filter(article => {
     const matchesSearch = article.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -59,7 +58,7 @@ const Articles = () => {
               fullWidth
               label="جستجو در مقالات"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -68,9 +67,9 @@ const Articles = () => {
               select
               label="دسته‌بندی"
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
+              onChange={e => setSelectedCategory(e.target.value)}
             >
-              {categories.map((category) => (
+              {categories.map(category => (
                 <MenuItem key={category.id} value={category.id}>
                   {category.title}
                 </MenuItem>
@@ -80,7 +79,7 @@ const Articles = () => {
         </Grid>
 
         <Grid container spacing={3}>
-          {displayedArticles.map((article) => (
+          {displayedArticles.map(article => (
             <Grid item xs={12} sm={6} md={4} key={article.id}>
               <ContentCard content={article} type="article" />
             </Grid>

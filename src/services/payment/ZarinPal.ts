@@ -32,21 +32,24 @@ export class ZarinpalService {
 
   static async requestPayment(data: PaymentRequest): Promise<PaymentResponse> {
     try {
-      const response = await axios.post(`${this.BASE_URL}/payment/request.json`, {
-        merchant_id: this.MERCHANT_ID,
-        amount: data.amount,
-        description: data.description,
-        callback_url: data.callbackUrl,
-        metadata: {
-          mobile: data.mobile,
-          email: data.email
+      const response = await axios.post(
+        `${this.BASE_URL}/payment/request.json`,
+        {
+          merchant_id: this.MERCHANT_ID,
+          amount: data.amount,
+          description: data.description,
+          callback_url: data.callbackUrl,
+          metadata: {
+            mobile: data.mobile,
+            email: data.email,
+          },
         }
-      });
+      );
 
       if (response.data.data.code === 100) {
         return {
           authority: response.data.data.authority,
-          url: `${this.PAYMENT_URL}/${response.data.data.authority}`
+          url: `${this.PAYMENT_URL}/${response.data.data.authority}`,
         };
       }
 
@@ -57,18 +60,23 @@ export class ZarinpalService {
     }
   }
 
-  static async verifyPayment(data: VerificationRequest): Promise<VerificationResponse> {
+  static async verifyPayment(
+    data: VerificationRequest
+  ): Promise<VerificationResponse> {
     try {
-      const response = await axios.post(`${this.BASE_URL}/payment/verify.json`, {
-        merchant_id: this.MERCHANT_ID,
-        amount: data.amount,
-        authority: data.authority
-      });
+      const response = await axios.post(
+        `${this.BASE_URL}/payment/verify.json`,
+        {
+          merchant_id: this.MERCHANT_ID,
+          amount: data.amount,
+          authority: data.authority,
+        }
+      );
 
       if (response.data.data.code === 100) {
         return {
           refId: response.data.data.ref_id,
-          cardHash: response.data.data.card_hash
+          cardHash: response.data.data.card_hash,
         };
       }
 

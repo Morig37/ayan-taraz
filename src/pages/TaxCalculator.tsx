@@ -10,10 +10,16 @@ const TaxCalculatorPage = () => {
         <Typography variant="h4" color="primary" align="center" gutterBottom>
           محاسبه‌گر مالیات آیان تراز
         </Typography>
-        <Typography variant="body1" color="text.secondary" align="center" sx={{ mb: 4 }}>
-          با استفاده از این ابزار می‌توانید مالیات خود را به صورت دقیق محاسبه کنید
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          align="center"
+          sx={{ mb: 4 }}
+        >
+          با استفاده از این ابزار می‌توانید مالیات خود را به صورت دقیق محاسبه
+          کنید
         </Typography>
-        
+
         <TaxCalculatorForm />
       </Box>
     </Container>

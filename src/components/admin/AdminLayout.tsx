@@ -76,7 +76,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       </Box>
       <Divider />
       <List>
-        {menuItems.map((item) => (
+        {menuItems.map(item => (
           <ListItem
             button
             key={item.path}

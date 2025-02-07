@@ -19,11 +19,7 @@ import {
   FilterList,
   Settings,
 } from '@mui/icons-material';
-import {
-  DataGrid,
-  GridColDef,
-  GridToolbar,
-} from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import {
   BarChart,
   Bar,
@@ -70,7 +66,8 @@ export const ReportViewer: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    const interval = config.refreshInterval && 
+    const interval =
+      config.refreshInterval &&
       setInterval(onRefresh, config.refreshInterval * 1000);
     return () => interval && clearInterval(interval);
   }, [config.refreshInterval, onRefresh]);
@@ -115,7 +112,7 @@ export const ReportViewer: React.FC<Props> = ({
                 key={axis}
                 type="monotone"
                 dataKey={axis}
-                stackId={config.chart.stacked ? "1" : undefined}
+                stackId={config.chart.stacked ? '1' : undefined}
                 fill={`hsl(${(index * 137.5) % 360}, 70%, 50%)`}
                 stroke={`hsl(${(index * 137.5) % 360}, 70%, 50%)`}
               />
@@ -127,15 +124,16 @@ export const ReportViewer: React.FC<Props> = ({
   };
 
   const renderTable = () => {
-    const columns: GridColDef[] = config.columns?.map(col => ({
-      field: col.field,
-      headerName: col.title,
-      flex: 1,
-      type: col.type,
-      valueFormatter: col.format ? 
-        (params) => new Intl.NumberFormat('fa-IR').format(params.value) :
-        undefined,
-    })) || [];
+    const columns: GridColDef[] =
+      config.columns?.map(col => ({
+        field: col.field,
+        headerName: col.title,
+        flex: 1,
+        type: col.type,
+        valueFormatter: col.format
+          ? params => new Intl.NumberFormat('fa-IR').format(params.value)
+          : undefined,
+      })) || [];
 
     return (
       <DataGrid
@@ -163,7 +161,11 @@ export const ReportViewer: React.FC<Props> = ({
         {Object.entries(data.summary).map(([key, value]) => (
           <Grid item xs={12} sm={6} md={3} key={key}>
             <Paper sx={{ p: 3, textAlign: 'center' }}>
-              <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+              <Typography
+                variant="subtitle2"
+                color="text.secondary"
+                gutterBottom
+              >
                 {key}
               </Typography>
               <Typography variant="h4">
@@ -194,7 +196,7 @@ export const ReportViewer: React.FC<Props> = ({
           >
             بروزرسانی
           </Button>
-          <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+          <IconButton onClick={e => setAnchorEl(e.currentTarget)}>
             <MoreVert />
           </IconButton>
         </Box>
@@ -207,7 +209,9 @@ export const ReportViewer: React.FC<Props> = ({
               <DatePicker
                 label="از تاریخ"
                 value={dateRange.start}
-                onChange={(date) => setDateRange({ ...dateRange, start: date || new Date() })}
+                onChange={date =>
+                  setDateRange({ ...dateRange, start: date || new Date() })
+                }
                 slotProps={{ textField: { fullWidth: true, size: 'small' } }}
               />
             </Grid>
@@ -215,17 +219,21 @@ export const ReportViewer: React.FC<Props> = ({
               <DatePicker
                 label="تا تاریخ"
                 value={dateRange.end}
-                onChange={(date) => setDateRange({ ...dateRange, end: date || new Date() })}
+                onChange={date =>
+                  setDateRange({ ...dateRange, end: date || new Date() })
+                }
                 slotProps={{ textField: { fullWidth: true, size: 'small' } }}
               />
             </Grid>
             <Grid item xs={12} md={4}>
               <Button
                 variant="contained"
-                onClick={() => onConfigChange({
-                  ...config,
-                  customRange: dateRange,
-                })}
+                onClick={() =>
+                  onConfigChange({
+                    ...config,
+                    customRange: dateRange,
+                  })
+                }
               >
                 اعمال فیلتر
               </Button>
@@ -259,15 +267,9 @@ export const ReportViewer: React.FC<Props> = ({
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem onClick={() => handleExport('pdf')}>
-          خروجی PDF
-        </MenuItem>
-        <MenuItem onClick={() => handleExport('excel')}>
-          خروجی Excel
-        </MenuItem>
-        <MenuItem onClick={() => handleExport('csv')}>
-          خروجی CSV
-        </MenuItem>
+        <MenuItem onClick={() => handleExport('pdf')}>خروجی PDF</MenuItem>
+        <MenuItem onClick={() => handleExport('excel')}>خروجی Excel</MenuItem>
+        <MenuItem onClick={() => handleExport('csv')}>خروجی CSV</MenuItem>
       </Menu>
     </Paper>
   );

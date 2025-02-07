@@ -38,7 +38,10 @@ export class SecurityService {
     }
   }
 
-  static async resolveAlert(alertId: string, resolvedBy: string): Promise<void> {
+  static async resolveAlert(
+    alertId: string,
+    resolvedBy: string
+  ): Promise<void> {
     try {
       await fetch(`${this.API_URL}/alerts/${alertId}/resolve`, {
         method: 'POST',

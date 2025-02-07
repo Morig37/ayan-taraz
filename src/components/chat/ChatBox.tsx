@@ -8,7 +8,7 @@ import {
   Typography,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
 } from '@mui/material';
 
 interface Message {
@@ -28,19 +28,22 @@ const ChatBox: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
 
-  const handleAction = useCallback((action: ChatAction) => {
-    switch (action.type) {
-      case 'CALCULATE_TAX':
-        navigate('/tax-calculator');
-        break;
-      case 'BOOK_CONSULTATION':
-        navigate('/consultation');
-        break;
-      // اضافه کردن اکشن‌های دیگر
-      default:
-        console.log('Unknown action:', action.type);
-    }
-  }, [navigate]);
+  const handleAction = useCallback(
+    (action: ChatAction) => {
+      switch (action.type) {
+        case 'CALCULATE_TAX':
+          navigate('/tax-calculator');
+          break;
+        case 'BOOK_CONSULTATION':
+          navigate('/consultation');
+          break;
+        // اضافه کردن اکشن‌های دیگر
+        default:
+          console.log('Unknown action:', action.type);
+      }
+    },
+    [navigate]
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,7 +53,7 @@ const ChatBox: React.FC = () => {
       id: Date.now().toString(),
       text: input,
       sender: 'user',
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
     setMessages(prev => [...prev, newMessage]);
@@ -61,14 +64,22 @@ const ChatBox: React.FC = () => {
   return (
     <Paper elevation={3} sx={{ p: 2, maxWidth: 600, mx: 'auto' }}>
       <List sx={{ height: 400, overflow: 'auto' }}>
-        {messages.map((message) => (
-          <ListItem key={message.id} sx={{
-            justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start'
-          }}>
-            <Paper elevation={1} sx={{
-              p: 1,
-              bgcolor: message.sender === 'user' ? 'primary.light' : 'grey.100'
-            }}>
+        {messages.map(message => (
+          <ListItem
+            key={message.id}
+            sx={{
+              justifyContent:
+                message.sender === 'user' ? 'flex-end' : 'flex-start',
+            }}
+          >
+            <Paper
+              elevation={1}
+              sx={{
+                p: 1,
+                bgcolor:
+                  message.sender === 'user' ? 'primary.light' : 'grey.100',
+              }}
+            >
               <ListItemText
                 primary={message.text}
                 secondary={message.timestamp.toLocaleTimeString('fa-IR')}
@@ -81,17 +92,12 @@ const ChatBox: React.FC = () => {
         <TextField
           fullWidth
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={e => setInput(e.target.value)}
           placeholder="پیام خود را بنویسید..."
           variant="outlined"
           size="small"
         />
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ mt: 1 }}
-          fullWidth
-        >
+        <Button type="submit" variant="contained" sx={{ mt: 1 }} fullWidth>
           ارسال
         </Button>
       </Box>

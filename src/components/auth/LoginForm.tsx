@@ -6,16 +6,22 @@ import { TextField, Button, Box, Alert } from '@mui/material';
 import { useAuth } from '../../hooks/useStore';
 import { LoginCredentials } from '../../types/auth';
 
-const schema = yup.object({
-  username: yup.string().required('نام کاربری الزامی است'),
-  password: yup.string().required('رمز عبور الزامی است'),
-  rememberMe: yup.boolean()
-}).required();
+const schema = yup
+  .object({
+    username: yup.string().required('نام کاربری الزامی است'),
+    password: yup.string().required('رمز عبور الزامی است'),
+    rememberMe: yup.boolean(),
+  })
+  .required();
 
 export const LoginForm: React.FC = () => {
   const { login, loading, error } = useAuth();
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginCredentials>({
-    resolver: yupResolver(schema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginCredentials>({
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data: LoginCredentials) => {
@@ -24,8 +30,12 @@ export const LoginForm: React.FC = () => {
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
-      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
-      
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+
       <TextField
         margin="normal"
         fullWidth
@@ -35,7 +45,7 @@ export const LoginForm: React.FC = () => {
         helperText={errors.username?.message}
         {...register('username')}
       />
-      
+
       <TextField
         margin="normal"
         fullWidth

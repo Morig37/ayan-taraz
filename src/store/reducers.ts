@@ -6,7 +6,7 @@ import uiReducer from './slices/uiSlice';
 export const rootReducer = combineReducers({
   auth: authReducer,
   settings: settingsReducer,
-  ui: uiReducer
+  ui: uiReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

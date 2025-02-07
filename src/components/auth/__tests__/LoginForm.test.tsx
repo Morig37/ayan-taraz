@@ -33,11 +33,11 @@ describe('LoginForm', () => {
 
   it('submits form with valid data', async () => {
     renderLoginForm();
-    
+
     fireEvent.change(screen.getByLabelText(/نام کاربری/i), {
       target: { value: 'testuser' },
     });
-    
+
     fireEvent.change(screen.getByLabelText(/رمز عبور/i), {
       target: { value: 'password123' },
     });
@@ -46,8 +46,12 @@ describe('LoginForm', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.queryByText(/نام کاربری الزامی است/i)).not.toBeInTheDocument();
-      expect(screen.queryByText(/رمز عبور الزامی است/i)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/نام کاربری الزامی است/i)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/رمز عبور الزامی است/i)
+      ).not.toBeInTheDocument();
     });
   });
 });

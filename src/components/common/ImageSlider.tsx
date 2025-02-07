@@ -61,19 +61,21 @@ const SlideIndicators = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1),
 }));
 
-const SlideIndicator = styled('button')<{ active?: boolean }>(({ theme, active }) => ({
-  width: 12,
-  height: 12,
-  borderRadius: '50%',
-  border: `2px solid ${theme.palette.primary.main}`,
-  backgroundColor: active ? theme.palette.primary.main : 'transparent',
-  cursor: 'pointer',
-  padding: 0,
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    backgroundColor: theme.palette.primary.main,
-  },
-}));
+const SlideIndicator = styled('button')<{ active?: boolean }>(
+  ({ theme, active }) => ({
+    width: 12,
+    height: 12,
+    borderRadius: '50%',
+    border: `2px solid ${theme.palette.primary.main}`,
+    backgroundColor: active ? theme.palette.primary.main : 'transparent',
+    cursor: 'pointer',
+    padding: 0,
+    transition: 'all 0.3s ease',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main,
+    },
+  })
+);
 
 export const ImageSlider: React.FC<ImageSliderProps> = ({
   images,
@@ -83,11 +85,11 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
   const theme = useTheme();
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    setCurrentIndex(prev => (prev === images.length - 1 ? 0 : prev + 1));
   }, [images.length]);
 
   const previousSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    setCurrentIndex(prev => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   const goToSlide = (index: number) => {
@@ -108,7 +110,7 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
         alt={images[currentIndex].title}
         loading="lazy"
       />
-      
+
       <SlideOverlay>
         <Typography variant="h4" sx={{ mb: 1 }}>
           {images[currentIndex].title}
@@ -118,17 +120,11 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
         </Typography>
       </SlideOverlay>
 
-      <NavigationButton
-        onClick={previousSlide}
-        sx={{ left: theme.spacing(2) }}
-      >
+      <NavigationButton onClick={previousSlide} sx={{ left: theme.spacing(2) }}>
         <ChevronRight />
       </NavigationButton>
 
-      <NavigationButton
-        onClick={nextSlide}
-        sx={{ right: theme.spacing(2) }}
-      >
+      <NavigationButton onClick={nextSlide} sx={{ right: theme.spacing(2) }}>
         <ChevronLeft />
       </NavigationButton>
 

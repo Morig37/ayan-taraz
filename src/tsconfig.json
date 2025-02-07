@@ -10,9 +10,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
+    "types": ["jest"],
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src"],

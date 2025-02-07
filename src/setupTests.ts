@@ -1,40 +1,36 @@
-import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
-import type { RenderOptions } from '@testing-library/react';
-import type { PropsWithChildren } from 'react';
-import React from 'react';
-import { Provider } from 'react-redux';
+/// <reference types="jest" />
+
 import { configureStore } from '@reduxjs/toolkit';
-import type { PreloadedState } from '@reduxjs/toolkit';
-import type { RootState } from './store';
+import { render } from '@testing-library/react';
 import authReducer from './store/slices/authSlice';
 import uiReducer from './store/slices/uiSlice';
+import { Provider } from 'react-redux';
 
-interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: PreloadedState<RootState>;
+const rootReducer = {
+  auth: authReducer,
+  ui: uiReducer,
+};
+
+
+const store = configureStore({
+  reducer: rootReducer,
+});
+
+const AllTheProviders = ({ children }) => {
+  return <Provider store={store}>{children}</Provider>;
+};
+
+interface TestWrapperProps {
+  children: React.ReactNode;
 }
 
-export function renderWithProviders(
-  ui: React.ReactElement,
-  {
-    preloadedState = {},
-    ...renderOptions
-  }: ExtendedRenderOptions = {}
-) {
-  const store = configureStore({
-    reducer: {
-      auth: authReducer,
-      ui: uiReducer,
-    },
-    preloadedState,
-  });
 
-  function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
-    return <Provider store={store}>{children}</Provider>;
-  }
 
-  return {
-    store,
-    ...render(ui, { wrapper: Wrapper, ...renderOptions }),
-  };
-}
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(ui, { wrapper: TestWrapper });
+};
+
+
+export * from '@testing-library/react';
+export { renderWithProviders as render };
+export default AllTheProviders;

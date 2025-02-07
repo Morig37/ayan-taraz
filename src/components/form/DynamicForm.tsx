@@ -9,43 +9,26 @@ import {
   FormControl,
   InputLabel,
   FormHelperText,
+  Button,
 } from '@mui/material';
-
-export interface FormField {
-  name: string;
-  label: string;
-  type: 'text' | 'email' | 'number' | 'select';
-  options?: { label: string; value: string | number }[];
-  validation?: ValidationRule[];
-  multiple?: boolean;
-}
-
-interface ValidationRule {
-  type:
-    | 'required'
-    | 'email'
-    | 'min'
-    | 'max'
-    | 'minLength'
-    | 'maxLength'
-    | 'pattern';
-  message: string;
-  params?: number | string | RegExp;
-}
+import { FormConfig, FormField } from '../../types/form';
 
 interface DynamicFormProps {
-  fields: FormField[];
+  config: FormConfig;
   onSubmit: (data: any) => void;
+  initialValues?: Record<string, any>;
 }
 
 export const DynamicForm: React.FC<DynamicFormProps> = ({
-  fields,
+  config,
   onSubmit,
+  initialValues,
 }) => {
   const schema = yup.object().shape(
-    fields.reduce((acc, field) => {
+    config.fields.reduce((acc, field) => {
       let validator: yup.AnySchema = yup.mixed();
 
+      // اعمال قواعد اعتبارسنجی
       field.validation?.forEach(rule => {
         switch (rule.type) {
           case 'required':
@@ -80,16 +63,16 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
 
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: initialValues,
   });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {fields.map(field => (
+      {config.fields.map(field => (
         <Controller
           key={field.name}
           name={field.name}
           control={control}
-          defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <FormControl fullWidth margin="normal" error={!!error}>
               {field.type === 'select' ? (
@@ -107,6 +90,7 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
                       </MenuItem>
                     ))}
                   </Select>
+                  {error && <FormHelperText>{error.message}</FormHelperText>}
                 </>
               ) : (
                 <TextField
@@ -122,6 +106,15 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
           )}
         />
       ))}
+      <Button 
+        type="submit"
+        variant="contained"
+        color="primary"
+        fullWidth
+        sx={{ mt: 2 }}
+      >
+        Submit
+      </Button>
     </form>
   );
 };

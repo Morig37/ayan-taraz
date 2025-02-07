@@ -1,23 +1,21 @@
-// src/types/form.ts
+export interface ValidationRule {
+  type: 'required' | 'minLength' | 'email' | 'min' | 'max' | 'pattern';
+  message: string;
+  params?: any;
+}
+
+export interface Option {
+  label: string;
+  value: string | number;
+}
+
 export interface FormField {
   name: string;
   label: string;
-  type:
-    | 'text'
-    | 'number'
-    | 'email'
-    | 'password'
-    | 'select'
-    | 'date'
-    | 'file'
-    | 'textarea';
+  type: 'text' | 'number' | 'email' | 'password' | 'select' | 'date' | 'file' | 'textarea';
   required?: boolean;
-  validation?: {
-    type: string;
-    params?: any;
-    message: string;
-  }[];
-  options?: { label: string; value: any }[];
+  validation?: ValidationRule[];
+  options?: Option[];
   defaultValue?: any;
   placeholder?: string;
   disabled?: boolean;

@@ -1,4 +1,3 @@
-// src/pages/TaxCalculator.tsx
 import React from 'react';
 import { Container, Typography, Box } from '@mui/material';
 import { TaxCalculatorForm } from '../components/tax/TaxCalculatorForm';
@@ -16,8 +15,7 @@ const TaxCalculatorPage = () => {
           align="center"
           sx={{ mb: 4 }}
         >
-          با استفاده از این ابزار می‌توانید مالیات خود را به صورت دقیق محاسبه
-          کنید
+          با استفاده از این ابزار می‌توانید مالیات خود را به صورت دقیق محاسبه کنید
         </Typography>
 
         <TaxCalculatorForm />

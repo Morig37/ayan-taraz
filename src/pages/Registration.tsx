@@ -4,30 +4,25 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { StyledTextField } from '../components/common/FormFields';
 
-try {
-  console.log('Form submitted:', values);
-} catch (error) {
-  console.error('Registration error:', error);
-}
 const validationSchema = Yup.object({
   firstName: Yup.string()
-    .required('نام الزامی است')
-    .min(2, 'نام باید حداقل 2 حرف باشد'),
+    .required('Required')
+    .min(2, 'Must be at least 2 characters'),
   lastName: Yup.string()
-    .required('نام خانوادگی الزامی است')
-    .min(2, 'نام خانوادگی باید حداقل 2 حرف باشد'),
-  email: Yup.string().email('ایمیل نامعتبر است').required('ایمیل الزامی است'),
+    .required('Required')
+    .min(2, 'Must be at least 2 characters'),
+  email: Yup.string().email('Invalid email').required('Required'),
   mobile: Yup.string()
-    .matches(/^09[0-9]{9}$/, 'شماره موبایل نامعتبر است')
-    .required('شماره موبایل الزامی است'),
+    .matches(/^09[0-9]{9}$/, 'Invalid phone number')
+    .required('Required'),
   password: Yup.string()
-    .min(8, 'رمز عبور باید حداقل 8 کاراکتر باشد')
-    .matches(/[a-zA-Z]/, 'رمز عبور باید شامل حروف باشد')
-    .matches(/[0-9]/, 'رمز عبور باید شامل اعداد باشد')
-    .required('رمز عبور الزامی است'),
+    .min(8, 'Must be at least 8 characters')
+    .matches(/[a-zA-Z]/, 'Must contain letters')
+    .matches(/[0-9]/, 'Must contain numbers')
+    .required('Required'),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'رمز عبور مطابقت ندارد')
-    .required('تکرار رمز عبور الزامی است'),
+    .oneOf([Yup.ref('password')], 'Passwords must match')
+    .required('Required'),
 });
 
 const RegistrationPage = () => {
@@ -41,11 +36,11 @@ const RegistrationPage = () => {
       confirmPassword: '',
     },
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       try {
-        // ارسال اطلاعات به سرور
+        // Submit the form values to the server
         console.log('Form submitted:', values);
-        // اینجا کد ارسال به سرور را اضافه کنید
+        // Add your server submission code here
       } catch (error) {
         console.error('Registration error:', error);
       }
@@ -57,7 +52,7 @@ const RegistrationPage = () => {
       <Box sx={{ py: 4 }}>
         <Paper sx={{ p: 4 }}>
           <Typography variant="h4" color="primary" align="center" gutterBottom>
-            ثبت‌نام در آیان تراز
+            Register to Ayan Taraz
           </Typography>
 
           <form onSubmit={formik.handleSubmit}>
@@ -66,15 +61,11 @@ const RegistrationPage = () => {
                 <StyledTextField
                   fullWidth
                   name="firstName"
-                  label="نام"
+                  label="First Name"
                   value={formik.values.firstName}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.firstName && Boolean(formik.errors.firstName)
-                  }
-                  helperText={
-                    formik.touched.firstName && formik.errors.firstName
-                  }
+                  error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+                  helperText={formik.touched.firstName && formik.errors.firstName}
                 />
               </Grid>
 
@@ -82,12 +73,10 @@ const RegistrationPage = () => {
                 <StyledTextField
                   fullWidth
                   name="lastName"
-                  label="نام خانوادگی"
+                  label="Last Name"
                   value={formik.values.lastName}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.lastName && Boolean(formik.errors.lastName)
-                  }
+                  error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                   helperText={formik.touched.lastName && formik.errors.lastName}
                 />
               </Grid>
@@ -96,7 +85,7 @@ const RegistrationPage = () => {
                 <StyledTextField
                   fullWidth
                   name="email"
-                  label="ایمیل"
+                  label="Email"
                   type="email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
@@ -109,7 +98,7 @@ const RegistrationPage = () => {
                 <StyledTextField
                   fullWidth
                   name="mobile"
-                  label="شماره موبایل"
+                  label="Mobile Number"
                   value={formik.values.mobile}
                   onChange={formik.handleChange}
                   error={formik.touched.mobile && Boolean(formik.errors.mobile)}
@@ -121,13 +110,11 @@ const RegistrationPage = () => {
                 <StyledTextField
                   fullWidth
                   name="password"
-                  label="رمز عبور"
+                  label="Password"
                   type="password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.password && Boolean(formik.errors.password)
-                  }
+                  error={formik.touched.password && Boolean(formik.errors.password)}
                   helperText={formik.touched.password && formik.errors.password}
                 />
               </Grid>
@@ -136,18 +123,12 @@ const RegistrationPage = () => {
                 <StyledTextField
                   fullWidth
                   name="confirmPassword"
-                  label="تکرار رمز عبور"
+                  label="Confirm Password"
                   type="password"
                   value={formik.values.confirmPassword}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.confirmPassword &&
-                    Boolean(formik.errors.confirmPassword)
-                  }
-                  helperText={
-                    formik.touched.confirmPassword &&
-                    formik.errors.confirmPassword
-                  }
+                  error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                  helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                 />
               </Grid>
 
@@ -159,7 +140,7 @@ const RegistrationPage = () => {
                   type="submit"
                   disabled={formik.isSubmitting}
                 >
-                  ثبت‌نام
+                  Register
                 </Button>
               </Grid>
             </Grid>

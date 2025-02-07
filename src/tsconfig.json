@@ -10,11 +10,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "strict": true,
-    "esModuleInterop": true,
-    "types": ["jest"],
-    "forceConsistentCasingInFileNames": true
+    "types": ["jest"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

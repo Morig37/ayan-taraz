@@ -1,6 +1,6 @@
 // src/services/chat/ChatService.ts
 import axios from 'axios';
-
+import { ErrorService } from '../ErrorService';
 export interface Message {
   id: string;
   text: string;
@@ -68,7 +68,12 @@ export class ChatService {
         suggestions: ['محاسبه مالیات', 'رزرو مشاوره', 'سوالات متداول'],
       };
     } catch (error) {
-      console.error('Chat service error:', error);
+      await ErrorService.logError({
+        severity: 'error',
+        source: 'client',
+        message: 'Chat service error',
+        context: { message },
+      });
       throw error;
     }
   }

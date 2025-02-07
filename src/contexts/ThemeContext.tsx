@@ -5,9 +5,8 @@ import {
 } from '@mui/material/styles';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
+import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
-import { prefixer } from 'stylis';
-
 interface ThemeContextType {
   theme: {
     direction: 'rtl' | 'ltr';
@@ -15,9 +14,7 @@ interface ThemeContextType {
   toggleDirection: () => void;
 }
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(
-  undefined
-);
+export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const cacheRtl = createCache({
   key: 'muirtl',
@@ -33,7 +30,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [direction, setDirection] = useState<'rtl' | 'ltr'>('rtl');
-
+  
   const theme = createTheme({
     direction,
     typography: {

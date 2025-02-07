@@ -21,22 +21,13 @@ interface HeaderProps {
   onDrawerToggle?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
+export const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
   const navigate = useNavigate();
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const user = useSelector((state: RootState) => state.auth.user);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {

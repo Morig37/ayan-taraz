@@ -5,7 +5,6 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 
-// eslint.config.js
 export default [
   {
     files: ['**/*.{ts,tsx}'],
@@ -15,13 +14,17 @@ export default [
       globals: {
         AudioWorkletGlobalScope: true,
       },
-      ourceType: 'module',
-     parser: typescriptParser,
+      sourceType: 'module', // اصلاح خطای تایپی
+      parser: typescriptParser,
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     linterOptions: {
       reportUnusedDisableDirectives: true,
       noInlineConfig: false,
-      maxWarnings: 0 // Move it here
+      maxWarnings: 0
     },
     plugins: {
       'react-hooks': reactHooks,

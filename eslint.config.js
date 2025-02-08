@@ -11,10 +11,17 @@ export default [
     ignores: ['dist'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        AudioWorkletGlobalScope: true,
+      },
       sourceType: 'module',
       parser: typescriptParser,
     },
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+      noInlineConfig: false,
+    },
+    maxWarnings: 0, // Moved to root level
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
@@ -35,7 +42,6 @@ export default [
       ],
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'react/prop-types': 'off',
-      // اضافه کردن قوانین دیگر در صورت نیاز
     },
   },
 ];

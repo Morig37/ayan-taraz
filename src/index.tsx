@@ -1,14 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './store/slices/authSlice';
-import uiReducer from './store/slices/uiSlice';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import App from './App';
+import store from './store';
 
-const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    ui: uiReducer
-  }
-});
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export default store;
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
+);

@@ -11,7 +11,6 @@ const rootReducer = {
   ui: uiReducer,
 };
 
-
 const store = configureStore({
   reducer: rootReducer,
 });
@@ -24,12 +23,9 @@ interface TestWrapperProps {
   children: React.ReactNode;
 }
 
-
-
 const renderWithProviders = (ui: React.ReactElement) => {
-  return render(ui, { wrapper: TestWrapper });
+  return render(ui, { wrapper: AllTheProviders });
 };
-
 
 export * from '@testing-library/react';
 export { renderWithProviders as render };

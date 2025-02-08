@@ -1,8 +1,20 @@
 {
   "name": "ayan-taraz",
+  "short_name": "آیان",
+  "start_url": "/",
+  "display": "standalone",
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "icons":[
+  {
+    "src": "/icons/icon-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }
+],
+
   "scripts": {
     "dev": "vite",
     "build": "vite build",

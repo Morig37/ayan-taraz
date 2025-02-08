@@ -1,5 +1,3 @@
-/// <reference types="jest" />
-
 import { configureStore } from '@reduxjs/toolkit';
 import { render } from '@testing-library/react';
 import authReducer from './store/slices/authSlice';
@@ -15,13 +13,13 @@ const store = configureStore({
   reducer: rootReducer,
 });
 
-const AllTheProviders = ({ children }) => {
-  return <Provider store={store}>{children}</Provider>;
-};
-
 interface TestWrapperProps {
   children: React.ReactNode;
 }
+
+const AllTheProviders: React.FC<TestWrapperProps> = ({ children }) => {
+  return <Provider store={store}>{children}</Provider>;
+};
 
 const renderWithProviders = (ui: React.ReactElement) => {
   return render(ui, { wrapper: AllTheProviders });

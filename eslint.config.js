@@ -12,9 +12,10 @@ export default [
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
-        AudioWorkletGlobalScope: true,
+        ...globals,
+        AudioWorkletGlobalScope: 'readonly', // تنظیم مقدار به 'readonly'
       },
-      sourceType: 'module', // اصلاح خطای تایپی
+      sourceType: 'module', 
       parser: typescriptParser,
       parserOptions: {
         project: ['./tsconfig.node.json', './tsconfig.app.json'],

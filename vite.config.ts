@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [
     { enforce: 'pre', ...mdx() },
     react({
-      include: /\.(mdx|js|jsx|ts|tsx)$/, // شامل کردن فایل‌ها برای Fast Refresh
-      jsxImportSource: '@emotion/react', // تنظیم کارخانه JSX به '@emotion/react'
-      jsxRuntime: 'classic', // استفاده از زمان اجرای کلاسیک
+      include: /\.(mdx|js|jsx|ts|tsx)$/,
+      jsxImportSource: '@emotion/react',
+      jsxRuntime: 'automatic',
       babel: {
         presets: [
           '@babel/preset-react',
@@ -16,12 +16,11 @@ export default defineConfig({
         ],
         plugins: [
           '@babel/plugin-transform-runtime',
-          // افزونه‌های سفارشی دیگر
         ],
-        babelrc: true, // استفاده از فایل‌های .babelrc
-        configFile: true, // استفاده از فایل‌های babel.config.js
+        babelrc: true,
+        configFile: true,
         parserOpts: {
-          plugins: ['decorators-legacy'], // فعال کردن افزونه‌های نحوی
+          plugins: ['decorators-legacy'],
         },
       },
     }),

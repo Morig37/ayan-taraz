@@ -31,7 +31,6 @@ import {
   Restore,
   Delete,
   Download,
-  Schedule,
   Settings,
 } from '@mui/icons-material';
 import {

@@ -1,5 +1,4 @@
-// src/components/admin/settings/GeneralSettings.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Paper,
   Typography,
@@ -8,7 +7,6 @@ import {
   Button,
   Grid,
   Avatar,
-  IconButton,
 } from '@mui/material';
 import { Edit, Save } from '@mui/icons-material';
 import { useFormik } from 'formik';
@@ -34,6 +32,9 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
   settings,
   onSave,
 }) => {
+  const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [faviconPreview, setFaviconPreview] = useState<string | null>(null);
+
   const formik = useFormik({
     initialValues: settings,
     validationSchema,
@@ -45,6 +46,28 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
       }
     },
   });
+
+  const handleLogoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setLogoPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleFaviconChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFaviconPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <Paper sx={{ p: 3 }}>
@@ -58,7 +81,7 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
             <Box sx={{ mb: 3 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Avatar
-                  src={settings.logo}
+                  src={logoPreview || settings.logo}
                   alt="لوگو"
                   sx={{ width: 100, height: 100, mr: 2 }}
                 />
@@ -68,12 +91,17 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
                   startIcon={<Edit />}
                 >
                   تغییر لوگو
-                  <input type="file" hidden accept="image/*" />
+                  <input
+                    type="file"
+                    hidden
+                    accept="image/*"
+                    onChange={handleLogoChange}
+                  />
                 </Button>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Avatar
-                  src={settings.favicon}
+                  src={faviconPreview || settings.favicon}
                   alt="فاوآیکن"
                   sx={{ width: 32, height: 32, mr: 2 }}
                 />
@@ -83,7 +111,12 @@ export const GeneralSettings: React.FC<GeneralSettingsProps> = ({
                   startIcon={<Edit />}
                 >
                   تغییر فاوآیکن
-                  <input type="file" hidden accept="image/*" />
+                  <input
+                    type="file"
+                    hidden
+                    accept="image/*"
+                    onChange={handleFaviconChange}
+                  />
                 </Button>
               </Box>
             </Box>

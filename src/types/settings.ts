@@ -1,17 +1,16 @@
-// src/types/settings.ts
 export interface GeneralSettings {
-  siteName: string;
-  siteDescription: string;
   logo: string;
   favicon: string;
+  siteName: string;
+  siteDescription: string;
   contactEmail: string;
   contactPhone: string;
   address: string;
   socialMedia: {
-    instagram?: string;
-    telegram?: string;
-    whatsapp?: string;
-    linkedin?: string;
+    instagram: string;
+    telegram: string;
+    whatsapp: string;
+    linkedin: string;
   };
 }
 

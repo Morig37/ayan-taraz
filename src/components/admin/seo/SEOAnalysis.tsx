@@ -11,7 +11,7 @@ import {
   Chip,
   CircularProgress,
 } from '@mui/material';
-import { CheckCircle, Error, Warning, Info } from '@mui/icons-material';
+import { CheckCircle, Error, Warning, } from '@mui/icons-material';
 import { SEOAnalysis as SEOAnalysisType } from '../../../types/seo';
 
 interface SEOAnalysisProps {

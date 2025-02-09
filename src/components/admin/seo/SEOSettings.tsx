@@ -14,9 +14,8 @@ import {
   MenuItem,
   IconButton,
   LinearProgress,
-  Alert,
 } from '@mui/material';
-import { Add, Delete, Save, Refresh, Search } from '@mui/icons-material';
+import { Add, Save, Refresh } from '@mui/icons-material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { SEOData } from '../../../types/seo';

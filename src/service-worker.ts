@@ -3,8 +3,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { render } from '@testing-library/react';
 import authReducer from './store/slices/authSlice';
 import uiReducer from './store/slices/uiSlice';
-// اگر ESLint خطای "Provider is declared but its value is never used" را مطرح کند، از کامنت زیر برای غیرفعال کردن هشدار استفاده کنید.
-/// eslint-disable-next-line no-unused-vars
 import { Provider } from 'react-redux';
 
 const rootReducer = {

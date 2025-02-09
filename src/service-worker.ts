@@ -1,19 +1,33 @@
-import { precacheAndRoute, registerRoute } from 'workbox-precaching';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import React from 'react';
+import { configureStore } from '@reduxjs/toolkit';
+import { render } from '@testing-library/react';
+import authReducer from './store/slices/authSlice';
+import uiReducer from './store/slices/uiSlice';
+// اگر ESLint خطای "Provider is declared but its value is never used" را مطرح کند، از کامنت زیر برای غیرفعال کردن هشدار استفاده کنید.
+/// eslint-disable-next-line no-unused-vars
+import { Provider } from 'react-redux';
 
-// Precache all assets specified in __WB_MANIFEST
-precacheAndRoute(self.__WB_MANIFEST);
+const rootReducer = {
+  auth: authReducer,
+  ui: uiReducer,
+};
 
-// Caching strategy for static resources (styles, scripts, workers)
-registerRoute(
-  ({ request }) =>
-    request.destination === 'style' ||
-    request.destination === 'script' ||
-    request.destination === 'worker',
-  new StaleWhileRevalidate({
-    cacheName: 'static-resources',
-    plugins: [
-      // You can add plugins like expiration and cacheable responses here
-    ]
-  })
-);
+const store = configureStore({
+  reducer: rootReducer,
+});
+
+interface TestWrapperProps {
+  children: React.ReactNode;
+}
+
+const AllTheProviders: React.FC<TestWrapperProps> = ({ children }) => {
+  return <Provider store={store}>{children}</Provider>;
+};
+
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(ui, { wrapper: AllTheProviders });
+};
+
+export * from '@testing-library/react';
+export { renderWithProviders as render };
+export default AllTheProviders;
